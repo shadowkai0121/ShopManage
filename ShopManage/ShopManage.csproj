@@ -88,11 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="css\._bootstrap.min.css" />
     <Content Include="css\._calendar.css" />
     <Content Include="css\._clndr.css" />
@@ -119,20 +114,7 @@
     <Content Include="css\swipebox.css" />
     <Content Include="fonts\._fontawesome-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="html_version\css\._bootstrap.min.css" />
-    <Content Include="html_version\css\._calendar.css" />
-    <Content Include="html_version\css\._clndr.css" />
-    <Content Include="html_version\css\._custom.css" />
-    <Content Include="html_version\css\._custom_1.css" />
-    <Content Include="html_version\css\._examples.css" />
-    <Content Include="html_version\css\._font-awesome.css" />
-    <Content Include="html_version\css\._graph.css" />
-    <Content Include="html_version\css\._main.css" />
-    <Content Include="html_version\css\._owl.carousel.css" />
-    <Content Include="html_version\css\._style.css" />
-    <Content Include="html_version\css\._swipebox.css" />
     <Content Include="html_version\css\bootstrap.min.css" />
     <Content Include="html_version\css\calendar.css" />
     <Content Include="html_version\css\clndr.css" />
@@ -145,44 +127,8 @@
     <Content Include="html_version\css\owl.carousel.css" />
     <Content Include="html_version\css\style.css" />
     <Content Include="html_version\css\swipebox.css" />
-    <Content Include="html_version\fonts\._fontawesome-webfont.svg" />
     <Content Include="html_version\fonts\fontawesome-webfont.svg" />
     <Content Include="html_version\graphs.html" />
-    <Content Include="html_version\images\._404.png" />
-    <Content Include="html_version\images\._arr.png" />
-    <Content Include="html_version\images\._dark.png" />
-    <Content Include="html_version\images\._ga.jpg" />
-    <Content Include="html_version\images\._ga1.jpg" />
-    <Content Include="html_version\images\._ga2.jpg" />
-    <Content Include="html_version\images\._ga3.jpg" />
-    <Content Include="html_version\images\._ga4.jpg" />
-    <Content Include="html_version\images\._ga5.jpg" />
-    <Content Include="html_version\images\._ga6.jpg" />
-    <Content Include="html_version\images\._ga7.jpg" />
-    <Content Include="html_version\images\._ga8.jpg" />
-    <Content Include="html_version\images\._icons.svg" />
-    <Content Include="html_version\images\._in.jpg" />
-    <Content Include="html_version\images\._in1.jpg" />
-    <Content Include="html_version\images\._in10.jpg" />
-    <Content Include="html_version\images\._in11.jpg" />
-    <Content Include="html_version\images\._in2.jpg" />
-    <Content Include="html_version\images\._in3.jpg" />
-    <Content Include="html_version\images\._in4.jpg" />
-    <Content Include="html_version\images\._in5.jpg" />
-    <Content Include="html_version\images\._in6.jpg" />
-    <Content Include="html_version\images\._in7.jpg" />
-    <Content Include="html_version\images\._in8.jpg" />
-    <Content Include="html_version\images\._in9.jpg" />
-    <Content Include="html_version\images\._link.png" />
-    <Content Include="html_version\images\._lo.png" />
-    <Content Include="html_version\images\._na.jpg" />
-    <Content Include="html_version\images\._na1.jpg" />
-    <Content Include="html_version\images\._na2.jpg" />
-    <Content Include="html_version\images\._pic3.jpg" />
-    <Content Include="html_version\images\._pr.jpg" />
-    <Content Include="html_version\images\._search.png" />
-    <Content Include="html_version\images\._tick1.png" />
-    <Content Include="html_version\images\._wo.jpg" />
     <Content Include="html_version\images\404.png" />
     <Content Include="html_version\images\arr.png" />
     <Content Include="html_version\images\dark.png" />
@@ -219,30 +165,6 @@
     <Content Include="html_version\images\tick1.png" />
     <Content Include="html_version\images\wo.jpg" />
     <Content Include="html_version\index.html" />
-    <Content Include="html_version\js\._bootstrap.min.js" />
-    <Content Include="html_version\js\._Chart.js" />
-    <Content Include="html_version\js\._clndr.js" />
-    <Content Include="html_version\js\._custom.js" />
-    <Content Include="html_version\js\._data.js" />
-    <Content Include="html_version\js\._gmaps.js" />
-    <Content Include="html_version\js\._jquery.calendario.js" />
-    <Content Include="html_version\js\._jquery.flot.js" />
-    <Content Include="html_version\js\._jquery.flot.pie.js" />
-    <Content Include="html_version\js\._jquery.flot.selection.js" />
-    <Content Include="html_version\js\._jquery.flot.stack.js" />
-    <Content Include="html_version\js\._jquery.metisMenu.js" />
-    <Content Include="html_version\js\._jquery.min.js" />
-    <Content Include="html_version\js\._jquery.nicescroll.js" />
-    <Content Include="html_version\js\._jquery.slimscroll.min.js" />
-    <Content Include="html_version\js\._jquery.swipebox.min.js" />
-    <Content Include="html_version\js\._moment-2.2.1.js" />
-    <Content Include="html_version\js\._owl.carousel.js" />
-    <Content Include="html_version\js\._pie-chart.js" />
-    <Content Include="html_version\js\._screenfull.js" />
-    <Content Include="html_version\js\._scripts.js" />
-    <Content Include="html_version\js\._site.js" />
-    <Content Include="html_version\js\._skycons.js" />
-    <Content Include="html_version\js\._underscore-min.js" />
     <Content Include="html_version\js\bootstrap.min.js" />
     <Content Include="html_version\js\Chart.js" />
     <Content Include="html_version\js\clndr.js" />
@@ -620,22 +542,18 @@
     <Content Include="js\site.js" />
     <Content Include="js\skycons.js" />
     <Content Include="js\underscore-min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="html_version\fonts\._fontawesome-webfont.eot" />
-    <Content Include="html_version\fonts\._fontawesome-webfont.ttf" />
-    <Content Include="html_version\fonts\._fontawesome-webfont.woff" />
-    <Content Include="html_version\fonts\._fontawesome-webfont.woff2" />
-    <Content Include="html_version\fonts\._FontAwesome.otf" />
-    <Content Include="html_version\fonts\._Montserrat-Regular.ttf" />
-    <Content Include="html_version\fonts\._Muli-Regular.ttf" />
-    <Content Include="html_version\fonts\fontawesome-webfont.eot" />
-    <Content Include="html_version\fonts\fontawesome-webfont.ttf" />
-    <Content Include="html_version\fonts\fontawesome-webfont.woff" />
-    <Content Include="html_version\fonts\fontawesome-webfont.woff2" />
-    <Content Include="html_version\fonts\FontAwesome.otf" />
-    <Content Include="html_version\fonts\Montserrat-Regular.ttf" />
-    <Content Include="html_version\fonts\Muli-Regular.ttf" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
     <Content Include="fonts\._fontawesome-webfont.eot" />
     <Content Include="fonts\._fontawesome-webfont.ttf" />
     <Content Include="fonts\._fontawesome-webfont.woff" />
@@ -650,6 +568,20 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\Montserrat-Regular.ttf" />
     <Content Include="fonts\Muli-Regular.ttf" />
+    <Content Include="html_version\fonts\fontawesome-webfont.eot" />
+    <Content Include="html_version\fonts\fontawesome-webfont.ttf" />
+    <Content Include="html_version\fonts\fontawesome-webfont.woff" />
+    <Content Include="html_version\fonts\fontawesome-webfont.woff2" />
+    <Content Include="html_version\fonts\FontAwesome.otf" />
+    <Content Include="html_version\fonts\Montserrat-Regular.ttf" />
+    <Content Include="html_version\fonts\Muli-Regular.ttf" />
+    <Content Include="html_version\Original\fonts\fontawesome-webfont.eot" />
+    <Content Include="html_version\Original\fonts\fontawesome-webfont.ttf" />
+    <Content Include="html_version\Original\fonts\fontawesome-webfont.woff" />
+    <Content Include="html_version\Original\fonts\fontawesome-webfont.woff2" />
+    <Content Include="html_version\Original\fonts\FontAwesome.otf" />
+    <Content Include="html_version\Original\fonts\Montserrat-Regular.ttf" />
+    <Content Include="html_version\Original\fonts\Muli-Regular.ttf" />
     <Content Include="html_version\~\fonts\._fontawesome-webfont.eot" />
     <Content Include="html_version\~\fonts\._fontawesome-webfont.ttf" />
     <Content Include="html_version\~\fonts\._fontawesome-webfont.woff" />
@@ -664,45 +596,11 @@
     <Content Include="html_version\~\fonts\FontAwesome.otf" />
     <Content Include="html_version\~\fonts\Montserrat-Regular.ttf" />
     <Content Include="html_version\~\fonts\Muli-Regular.ttf" />
-    <Content Include="html_version\Original\fonts\fontawesome-webfont.eot" />
-    <Content Include="html_version\Original\fonts\fontawesome-webfont.ttf" />
-    <Content Include="html_version\Original\fonts\fontawesome-webfont.woff" />
-    <Content Include="html_version\Original\fonts\fontawesome-webfont.woff2" />
-    <Content Include="html_version\Original\fonts\FontAwesome.otf" />
-    <Content Include="html_version\Original\fonts\Montserrat-Regular.ttf" />
-    <Content Include="html_version\Original\fonts\Muli-Regular.ttf" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\web.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Home\Month.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -712,6 +610,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="html_version\coverage\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

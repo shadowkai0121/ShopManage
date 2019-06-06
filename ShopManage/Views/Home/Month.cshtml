@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Month";
+}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js'></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+<!--Banner-->
+<div class="banner">
+    <h2>
+        <a href="~/Home/Index">Home</a>
+        <i class="fa fa-angle-right"></i>
+        <span>Graphs</span>
+    </h2>
+</div>
+<!--/banner-->
+<div class="content-top">
+    <div class="col-md-4">
+        <div class="content-top-1">
+            <div class="top-content1">
+                <h3 class="text-center">2019-06</h3>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--Pie Chart 1-->
+        <div class="content-top-1">
+            <div class="col-md-6 top-content">
+                <h5>$ 999999</h5>
+                <label>毛利</label>
+            </div>
+            <div class="col-md-6 top-content1">
+                <div id="profitMargin" class="pie-title-center" data-percent="25">
+                    <span class="pie-value"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--/Pie Chart 1-->
+        <!--Pie Chart 2-->
+        <div class="content-top-1">
+            <div class="col-md-6 top-content">
+                <h5>$ 999999</h5>
+                <label>人事</label>
+            </div>
+            <div class="col-md-6 top-content1">
+                <div id="personalCost" class="pie-title-center" data-percent="5">
+                    <span class="pie-value"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--/Pie Chart 2-->
+    </div>
+    <!--Line Chart-->
+    <div class="col-md-8">
+        <span>In deigned below from and sighed strength native he sun drowsy from sorrow had upon delphis childe pleasure save the</span>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script src="~/js/pie-chart.js" type="text/javascript"></script>
+<script>
+    $('#profitMargin').pieChart({
+        barColor: '#00FFFF',
+        trackColor: '#eee',
+        lineCap: 'round',
+        lineWidth: 8,
+        onStep: function (from, to, percent) {
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+        }
+    })
+    $('#personalCost').pieChart({
+        barColor: '#FFFF33',
+        trackColor: '#eee',
+        lineCap: 'round',
+        lineWidth: 8,
+        onStep: function (from, to, percent) {
+            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+        }
+    })
+</script>

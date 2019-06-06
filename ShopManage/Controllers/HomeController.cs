@@ -13,5 +13,11 @@ namespace ShopManage.Controllers
         {
             return View();
         }
+
+        // GET: Month
+        public ActionResult Month()
+        {
+            return View();
+        }
     }
 }
