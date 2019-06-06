@@ -19,5 +19,11 @@ namespace ShopManage.Controllers
         {
             return View();
         }
+
+        // GET: Region
+        public ActionResult Region()
+        {
+            return View();
+        }
     }
 }
