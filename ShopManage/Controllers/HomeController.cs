@@ -25,5 +25,11 @@ namespace ShopManage.Controllers
         {
             return View();
         }
+
+        // GET: SingleProduct
+        public ActionResult SingleProduct()
+        {
+            return View();
+        }
     }
 }

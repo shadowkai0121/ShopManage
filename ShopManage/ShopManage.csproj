@@ -602,6 +602,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Month.cshtml" />
     <Content Include="Views\Home\Region.cshtml" />
+    <Content Include="Views\Home\SingleProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
