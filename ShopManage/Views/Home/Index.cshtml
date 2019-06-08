@@ -163,10 +163,36 @@
         <!----End Calender -------->
     </div>
     <div class="col-md-3">
+        <div class="tab-pane active text-style top-content1" id="tab1">
+            <div class="inbox-right">
+                <div class="mailbox-content">
+                    <table class="table">
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="table-text">
+                                    <h6>訂單名稱</h6>
+                                    <p>明細</p>
+                                </td>
+                                <td class="march">
+                                    06-08
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+    <!--時速表-->
     <div class="col-md-5">
-        <canvas id="guage"></canvas>
+        <div class="content-top-1">
+            <div class="top-content1">
+                <canvas class="center-block" id="guage"></canvas>
+            </div>
+        </div>
     </div>
+    <!--時速表-->
     <div class="clearfix"> </div>
 </div>
 <div class="clearfix"></div>
@@ -175,8 +201,8 @@
 <script>
     var gauge = new RadialGauge({
         renderTo: 'guage',
-        width: 400,
-        height: 400,
+        width: 350,
+        height: 350,
         units: "People/Hr",
         minValue: 0,
         maxValue: 10000,
