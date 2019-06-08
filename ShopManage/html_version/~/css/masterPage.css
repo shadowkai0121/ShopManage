@@ -1,0 +1,58 @@
+﻿body {
+}
+
+/*=====右上 administrator區======*/
+.drop-men{
+    padding:1rem;
+}
+
+/*=====左上角的 logo區=======*/
+.navbar-header {
+    background-color: #ff9900;
+}
+
+/*logo文字*/
+.navbar-header h1 a.navbar-brand {
+    background-color: #ff9900;
+}
+    .navbar-header h1 a.navbar-brand:hover {
+        background-color: #FBAA19;
+    }
+
+ /*RWD的漢堡鍵*/
+.navbar-default .navbar-toggle {
+    border-color: #1ABC9C;
+    background-color: #1ABC9C !important;
+}
+
+
+/*====== 左側-navbar =========*/
+
+.sidebar ul li a {
+    color: #999;
+}
+
+i.nav_icon {
+    color: #999;
+}
+
+/*移到子選單，彈出的樣式*/
+.hvr-bounce-to-right::before {
+    background-color: #1ABC9C;
+}
+
+
+/*--- RWD width<1025 ----*/
+@media (max-width:1025px) {
+}
+    /* width<768*/
+    @media (max-width:769px) {
+    }
+    /* width<375*/
+    @media (max-width:376px) {
+
+        /*=====左上角的 logo區======-*/
+        .navbar-header h1 a.navbar-brand {
+            padding-left: 1rem;
+        }
+    }
