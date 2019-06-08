@@ -53,7 +53,88 @@
     </div>
     <!--Line Chart-->
     <div class="col-md-8">
-        <span>In deigned below from and sighed strength native he sun drowsy from sorrow had upon delphis childe pleasure save the</span>
+            <div class="content-top-2">
+                <!---start-chart---->
+                <!--折線圖--->
+                <div class="content-graph">
+                    <!--graph-->
+                    <link rel="stylesheet" href="~/css/graph.css">
+                    <!--//graph-->
+                    <script src="~/js/jquery.flot.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            data = []
+                            for (let i = 0; i < 31; i++) {
+                                data.push([i, Math.random() * 5 + 10])
+                            }
+                            // Graph Data ##############################################
+                            var graphData = [{
+                                // Visits
+                                data: data,
+                                color: '#999999'
+                            }];
+
+                            // Lines Graph #############################################
+                            $.plot($('#graph-lines'), graphData, {
+                                series: {
+                                    points: {
+                                        show: true,
+                                        radius: 3
+                                    },
+                                    lines: {
+                                        show: true
+                                    },
+                                    shadowSize: 0
+                                },
+                                grid: {
+                                    color: '#7f8c8d',
+                                    borderColor: 'transparent',
+                                    borderWidth: 20,
+                                    hoverable: true
+                                },
+                                xaxis: {
+                                    tickColor: 'transparent',
+                                },
+                                yaxis: {
+                                }
+                            });
+
+                            // Tooltip #################################################
+                            function showTooltip(x, y, contents) {
+                                $('<div id="tooltip">' + contents + '</div>').css({
+                                    top: y - 32,
+                                    left: x - 20
+                                }).appendTo('body').fadeIn();
+                            }
+
+                            var previousPoint = null;
+
+                            $('#graph-lines, #graph-bars').bind('plothover', function (event, pos, item) {
+                                if (item) {
+                                    if (previousPoint != item.dataIndex) {
+                                        previousPoint = item.dataIndex;
+                                        $('#tooltip').remove();
+                                        var x = item.datapoint[0],
+                                            y = item.datapoint[1];
+                                        showTooltip(item.pageX, item.pageY, x + ' 號營業額 ' + y.toFixed(2) + ' 萬元');
+                                    }
+                                } else {
+                                    $('#tooltip').remove();
+                                    previousPoint = null;
+                                }
+                            });
+
+                        });
+                    </script>
+                    <div class="graph-container">
+
+                        <div id="graph-lines"> </div>
+                    </div>
+
+                </div>
+                <!--/折線圖-->
+            <div class="clearfix"> </div>
+        </div>
     </div>
     <div class="clearfix"></div>
 </div>
