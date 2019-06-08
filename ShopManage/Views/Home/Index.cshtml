@@ -163,11 +163,58 @@
         <!----End Calender -------->
     </div>
     <div class="col-md-3">
-        <span>Scorching long lineage and seek harolds native with strange olden had childe condemned had to and mirth his take where</span>
     </div>
     <div class="col-md-5">
-        <span>Deem adversity nor lone the childe these maidens blazon in reverie there feel harolds oh thy brow but what breast of revellers the from before did parasites spoiled and in</span>
+        <canvas id="guage"></canvas>
     </div>
     <div class="clearfix"> </div>
 </div>
 <div class="clearfix"></div>
+
+<script src="~/js/guage/gauge.min.js"></script>
+<script>
+    var gauge = new RadialGauge({
+        renderTo: 'guage',
+        width: 400,
+        height: 400,
+        units: "People/Hr",
+        minValue: 0,
+        maxValue: 10000,
+        majorTicks: [
+            "0",
+            "1000",
+            "2000",
+            "3000",
+            "4000",
+            "5000",
+            "6000",
+            "7000",
+            "8000",
+            "9000",
+            "10000"
+        ],
+        minorTicks: 5,
+        strokeTicks: true,
+        highlights: [
+            {
+                "from": 9000,
+                "to": 10000,
+                "color": "rgba(200, 50, 50, .75)"
+            }
+        ],
+        colorPlate: "#fff",
+        borderShadowWidth: 0,
+        borders: true,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear"
+    }).draw();
+
+    setInterval(() => {
+        gauge.value = Math.random() * 2000 + 5000
+    }, 2000);
+</script>

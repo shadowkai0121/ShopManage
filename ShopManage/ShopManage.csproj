@@ -524,6 +524,7 @@
     <Content Include="js\custom.js" />
     <Content Include="js\data.js" />
     <Content Include="js\gmaps.js" />
+    <Content Include="js\guage\gauge.min.js" />
     <Content Include="js\jquery.calendario.js" />
     <Content Include="js\jquery.flot.js" />
     <Content Include="js\jquery.flot.pie.js" />
@@ -596,6 +597,10 @@
     <Content Include="html_version\~\fonts\FontAwesome.otf" />
     <Content Include="html_version\~\fonts\Montserrat-Regular.ttf" />
     <Content Include="html_version\~\fonts\Muli-Regular.ttf" />
+    <Content Include="js\guage\LICENSE" />
+    <Content Include="js\guage\package-lock.json" />
+    <Content Include="js\guage\package.json" />
+    <Content Include="js\guage\README.md" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

@@ -1,0 +1,102 @@
+{
+  "_from": "canvas-gauges@radial",
+  "_id": "canvas-gauges@2.1.5-radial",
+  "_inBundle": false,
+  "_integrity": "sha512-wOkJjA85MaIsatgHyqOXRp8k6g7z1j0sLMAzB4XruC8aVIpnVteuFzsqQIG5vRfV9RbIJ4Z6ZvRgngcBLjlGtg==",
+  "_location": "/canvas-gauges",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "canvas-gauges@radial",
+    "name": "canvas-gauges",
+    "escapedName": "canvas-gauges",
+    "rawSpec": "radial",
+    "saveSpec": null,
+    "fetchSpec": "radial"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/canvas-gauges/-/canvas-gauges-2.1.5-radial.tgz",
+  "_shasum": "429e74ca5482ec4065f0b6e86cca73b3df9763d4",
+  "_spec": "canvas-gauges@radial",
+  "_where": "C:\\Users\\admin\\Desktop\\Gauge",
+  "author": {
+    "name": "Mykhailo Stadnyk",
+    "email": "mikhus@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Mikhus/canvas-gauges/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Chris Poile",
+      "email": "poile@edwards.usask.ca"
+    },
+    {
+      "name": "Luca Invernizzi",
+      "url": "http://www.lucainvernizzi.net"
+    },
+    {
+      "name": "Rhys Lloyd",
+      "url": "http://rhyslloyd.me"
+    },
+    {
+      "name": "Robert Blackburn",
+      "url": "http://www.rwblackburn.com"
+    },
+    {
+      "name": "Charles Galpin",
+      "url": "https://github.com/cgalpin"
+    },
+    {
+      "name": "Luca Ghio",
+      "url": "https://github.com/cassiodoroVicinetti"
+    },
+    {
+      "name": "Greg",
+      "url": "https://github.com/gregroper"
+    },
+    {
+      "name": "David Esperalta",
+      "email": "info@davidesperalta.com"
+    },
+    {
+      "name": "Gwenaël",
+      "url": "https://thegtricks.thegounet.fr"
+    },
+    {
+      "name": "migeruhito",
+      "url": "https://github.com/migeruhito"
+    },
+    {
+      "name": "brblord",
+      "url": "https://github.com/brblord"
+    },
+    {
+      "name": "piglione73",
+      "url": "https://github.com/piglione73"
+    }
+  ],
+  "deprecated": false,
+  "description": "Minimalist HTML5 Canvas Gauges",
+  "homepage": "https://github.com/Mikhus/canvas-gauges#readme",
+  "keywords": [
+    "gauge",
+    "canvas",
+    "html5",
+    "javascript",
+    "radial-gauge"
+  ],
+  "license": "MIT",
+  "main": "gauge.min.js",
+  "name": "canvas-gauges",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Mikhus/canvas-gauges.git"
+  },
+  "version": "2.1.5-radial"
+}
