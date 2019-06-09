@@ -601,6 +601,7 @@
     <Content Include="js\guage\package-lock.json" />
     <Content Include="js\guage\package.json" />
     <Content Include="js\guage\README.md" />
+    <Content Include="money.json" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -608,6 +609,7 @@
     <Content Include="Views\Home\Month.cshtml" />
     <Content Include="Views\Home\Region.cshtml" />
     <Content Include="Views\Home\SingleProduct.cshtml" />
+    <Content Include="taiwan.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
