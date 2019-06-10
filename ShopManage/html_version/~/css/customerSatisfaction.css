@@ -1,11 +1,150 @@
-﻿body {
+﻿/*----- 桌號tabs ------*/
+/*桌號*/
+.table-tabs {
+    margin-top: 1rem;
+    padding: 0.7rem 0.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid #55ACEE;
+    color: #55ACEE;
+    height: 3rem;
+    cursor: pointer;
+    display: block;
+}
+.table-tabs:hover {  
+    background-color: #55ACEE;
+    border-radius: 1.5rem;
+    color: white;
+    height: 3rem;
+    cursor: pointer;
+    display: block;
+}
+   
+
+
+
+.tableNum {
+    float: left;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
 }
 
-/*白板底的pannel*/
-.whiteCard-pannel {
+/*進出場時間*/
+.in-out-time {
+    font-size: 1rem;
+    float: right;
+    display: flex;
+    font-size: 1.2rem;
+}
+
+    .in-out-time div {
+        margin: 0 0.5rem;
+    }
+
+
+/*----- 臉部偵測頁 ---------*/
+.faceDetect-pannel {
+    display:none;
     background-color: white;
-    margin: 1rem auto;
+    margin: 0 auto;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    padding: 1rem 1rem;
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+    padding: 0 1rem;
+    color: #555;
+}
+
+/*偵測到的全圖*/
+.full-img-row {
+    padding-top: 0.5rem;
+}
+
+.detect-full-img img {
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+}
+
+/*偵測到的小圖*/
+.part-img-row {
+    padding: 1rem 0.2rem;
+}
+
+.detect-part-img {
+    display:block;
+    margin:0 auto;
+    float:left;
+    width:25%;
+    padding:0.1rem 0.25rem;
+}
+
+/*偵測結果*/
+.result-row {
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+    padding-bottom:1rem;
+}
+
+.result-content {
+    padding: 1rem 0.5rem;
+    border: 1px solid #8CC540;
+    border-radius:10px;
+}
+
+/*--- RWD width<1025 ----*/
+@media (max-width:1025px) {
+}
+/* width<768*/
+@media (max-width:769px) {
+    /*桌號*/
+    .tableNum {
+        font-size: 1.2rem;
+    }
+
+    /*進出場時間*/
+    .in-out-time {
+        font-size: 1rem;
+    }
+
+        .in-out-time div {
+            margin: 0 1rem;
+        }
+
+    /*偵測到的全圖*/
+    .detect-full-img img {
+        width: 440px;
+    }
+
+    /*偵測到的小圖*/
+    .detect-part-img {
+       
+    }
+
+}
+/* width<375*/
+@media (max-width:376px) {
+
+    /*桌號*/
+    .tableNum {
+        font-size: 1rem;
+        padding-left: 0.5rem;
+    }
+
+    /*進出場時間*/
+    .in-out-time {
+    }
+
+        .in-out-time div {
+            margin: 0 0.2rem;
+        }
+
+
+    /*偵測到的全圖*/
+    .detect-full-img img {
+        width: 330px;
+    }
+    /*偵測到的小圖*/
+    .detect-part-img {
+        width:50%;
+        padding:0.2rem;
+    }
 }
