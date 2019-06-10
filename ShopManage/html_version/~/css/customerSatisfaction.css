@@ -1,8 +1,8 @@
 ﻿body {
 }
 
-/*背景白色的pannel*/
-.content-pannel {
+/*白板底的pannel*/
+.whiteCard-pannel {
     background-color: white;
     margin: 1rem auto;
     border-radius: 4px;

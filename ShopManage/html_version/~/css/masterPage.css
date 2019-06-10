@@ -3,6 +3,16 @@
     font-size:1rem;
 }
 
+/*白板底的pannel*/
+.whiteCard-pannel {
+    background-color: white;
+    margin: 1rem auto;
+    border-radius: 4px;
+    /*box-shadow: 0 1px 1px rgba(0,0,0,.05);*/
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.15);
+    padding: 1rem 1rem;
+}
+
 /*=====右上 administrator區======*/
 .drop-men{
     padding:1rem;
