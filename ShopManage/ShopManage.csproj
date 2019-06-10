@@ -165,7 +165,7 @@
     <Content Include="html_version\images\search.png" />
     <Content Include="html_version\images\tick1.png" />
     <Content Include="html_version\images\wo.jpg" />
-    <Content Include="html_version\new-masterPage.html" />
+    <Content Include="html_version\masterPage.html" />
     <Content Include="html_version\js\bootstrap.min.js" />
     <Content Include="html_version\js\Chart.js" />
     <Content Include="html_version\js\clndr.js" />

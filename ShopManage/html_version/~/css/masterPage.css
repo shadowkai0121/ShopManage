@@ -9,7 +9,7 @@
     margin: 1rem auto;
     border-radius: 4px;
     /*box-shadow: 0 1px 1px rgba(0,0,0,.05);*/
-    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
     padding: 1rem 1rem;
 }
 
@@ -42,6 +42,8 @@
 
 .sidebar ul li a {
     color: #999;
+    padding: 0.6rem 0.5rem;
+    font-size: 1.25rem;
 }
 
 i.nav_icon {
@@ -51,6 +53,7 @@ i.nav_icon {
 /*移到子選單，彈出的樣式*/
 .hvr-bounce-to-right::before {
     background-color: #1ABC9C;
+    right: 75%;
 }
 
 
@@ -66,5 +69,17 @@ i.nav_icon {
         /*=====左上角的 logo區======-*/
         .navbar-header h1 a.navbar-brand {
             padding-left: 1rem;
+        }
+
+        /*====== 左側-navbar =========*/
+        .sidebar ul li a {
+            padding: 0.2rem 0.5rem;
+            font-size:1rem;
+        }
+
+        /*移到子選單，彈出的樣式*/
+        .hvr-bounce-to-right::before {
+            background-color: #1ABC9C;
+            right: 82%;
         }
     }
