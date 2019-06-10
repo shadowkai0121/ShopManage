@@ -191,7 +191,6 @@
     <Content Include="html_version\js\skycons.js" />
     <Content Include="html_version\js\underscore-min.js" />
     <Content Include="html_version\layout.html" />
-    <Content Include="html_version\masterPage.html" />
     <Content Include="html_version\customerSatisfaction.html" />
     <Content Include="html_version\Original\404.html" />
     <Content Include="html_version\Original\blank.html" />
