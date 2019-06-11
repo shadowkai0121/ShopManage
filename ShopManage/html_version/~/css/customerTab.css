@@ -1,11 +1,12 @@
-body {
+/*body {
   background-color: #6fcae7;
   overflow-y: scroll;
-  overflow-x: hidden; }
+  overflow-x: hidden; }*/
 
 #aspect-content {
   margin: 50px 0 0;
-  font-family: "Poppins", sans-serif; }
+}
+
   #aspect-content * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box; }
