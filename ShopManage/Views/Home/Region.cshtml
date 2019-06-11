@@ -42,12 +42,11 @@
         scale: 5000,
         // 可自由增減數量
         // 資料級距
-        domain: [0, 60000],
+        domain: [30000,60000],
         // 級距顏色
         coloreRange: ["#FFCCCC", "#FF0000"],
         hover: "#FFDC35"
     }
-
     var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
     // 繪製地圖
     $(function () {
