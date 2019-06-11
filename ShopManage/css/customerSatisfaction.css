@@ -1,0 +1,174 @@
+﻿/*=========== customerTabs================*/
+#aspect-content {
+    margin: 1rem 0 0;
+}
+
+.aspect-tab {
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+/*左邊桌號+%*/
+.aspect-info {
+    width: 55%;
+}
+
+/*百分比圖表的位置*/
+.chart-content {
+    position: relative;
+    top: 0.5rem;
+    left: -1rem;
+}
+
+/*pie的百分比數字*/
+.pie-value {
+    font-size: 1rem;
+    color: #7ED321;
+    font-weight: 600;
+}
+
+/*桌號*/
+.aspect-name {
+    color: #5d5d5d;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 1.6rem;
+    left: 5rem;
+}
+
+/*總人數*/
+.all-opinions {
+    font-size: 1.3rem;
+}
+
+/*右邊滿意度人數*/
+.aspect-stat {
+    width: 45%;
+}
+
+/*偵測結果*/
+.sentiment-wrapper > div > div {
+    padding: 16px 10px 0px;
+}
+.sentiment-wrapper {
+    padding: 1rem 0.5rem;
+}
+
+.opinion-header {
+    margin: 0 0 10px;
+    font-size: 1rem;
+}
+
+
+
+/*天空藍色的pannel*/
+.background-pannel {
+    background-color: #6fcae7;
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+  
+
+
+/*進出場時間*/
+.in-out-time {
+    padding: 0.7rem 0.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/*偵測到的全圖*/
+.full-img-row {
+    padding-top: 0.5rem;
+}
+
+.detect-full-img img {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/*偵測到的小圖*/
+.part-img-row {
+    padding: 1rem 0.2rem;
+}
+
+.detect-part-img {
+    display:block;
+    margin:0 auto;
+    width:100%;
+    padding:0.5rem 0;
+}
+
+
+/*--- 右側 Bar圖表--- */
+.grid-1{
+  border:none;
+  padding:1rem 0.5rem;
+}
+
+.barChart {
+    width: 100%;
+    padding: 1rem 0;
+}
+
+/*--- RWD width<1025 ----*/
+@media (max-width:1025px) {
+}
+/* width<768*/
+@media (max-width:769px) {   
+
+    /*進出場時間*/
+    .in-out-time {
+        font-size: 1rem;
+    }
+
+    /*偵測到的全圖*/
+    .detect-full-img img {
+        width: 440px;
+    }
+
+    /*偵測到的小圖*/
+    .detect-part-img {
+        border-radius: 50%;
+    }
+
+    .all-opinions {
+        float: right;
+        width: 10%;
+    }
+   
+
+}
+/* width<375*/
+@media (max-width:376px) {  
+
+    /*進出場時間*/
+    .in-out-time {
+    }
+
+    /*偵測到的全圖*/
+    .detect-full-img img {
+        width: 330px;
+    }
+    /*偵測到的小圖*/
+    .detect-part-img {
+        width: 200px;
+    }
+
+    .aspect-stat .all-opinions {
+        float: right;
+        width: 10%;
+    }
+    .aspect-name{
+        font-size:1.5rem;
+        top:2.5rem;
+    }
+
+    /*pie的百分比數字*/
+    .pie-value {
+        font-size: 1.1rem;
+        color: #7ED321;
+        font-weight: 600;
+    }
+}

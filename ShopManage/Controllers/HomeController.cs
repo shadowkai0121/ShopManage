@@ -35,5 +35,12 @@ namespace ShopManage.Controllers
         {
             return View();
         }
+
+        //顧客滿意度
+        public ActionResult customerSatisfaction()
+        {
+            return View();
+        }
+        
     }
 }
