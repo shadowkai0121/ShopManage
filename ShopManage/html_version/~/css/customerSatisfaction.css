@@ -1,56 +1,80 @@
-﻿/*----- 桌號tabs ------*/
+﻿/*=========== customerTabs================*/
+#aspect-content {
+    margin: 1rem 0 0;
+}
+
+.aspect-tab {
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+/*左邊桌號+%*/
+.aspect-info {
+    width: 55%;
+}
+
+/*百分比圖表的位置*/
+.chart-content {
+    position: relative;
+    top: 0.5rem;
+    left: -1rem;
+}
+
+/*pie的百分比數字*/
+.pie-value {
+    font-size: 1rem;
+    color: #7ED321;
+    font-weight: 600;
+}
+
 /*桌號*/
-.table-tabs {
-    margin-top: 1rem;
-    padding: 0.7rem 0.5rem;
-    border-radius: 1.5rem;
-    border: 1px solid #55ACEE;
-    color: #55ACEE;
-    height: 3rem;
-    cursor: pointer;
-    display: block;
+.aspect-name {
+    color: #5d5d5d;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 1.6rem;
+    left: 5rem;
 }
-.table-tabs:hover {  
-    background-color: #55ACEE;
-    border-radius: 1.5rem;
-    color: white;
-    height: 3rem;
-    cursor: pointer;
-    display: block;
+
+/*總人數*/
+.all-opinions {
+    font-size: 1.3rem;
 }
-   
+
+/*右邊滿意度人數*/
+.aspect-stat {
+    width: 45%;
+}
+
+/*偵測結果*/
+.sentiment-wrapper > div > div {
+    padding: 16px 10px 0px;
+}
+.sentiment-wrapper {
+    padding: 1rem 0.5rem;
+}
+
+.opinion-header {
+    margin: 0 0 10px;
+    font-size: 1rem;
+}
 
 
 
-.tableNum {
-    float: left;
-    padding-left: 0.5rem;
-    font-size: 1.2rem;
+/*天空藍色的pannel*/
+.background-pannel {
+    background-color: #6fcae7;
+    margin: 1rem;
+    border-radius: 0.5rem;
 }
+
+  
+
 
 /*進出場時間*/
 .in-out-time {
-    font-size: 1rem;
-    float: right;
-    display: flex;
+    padding: 0.7rem 0.5rem;
+    text-align: center;
     font-size: 1.2rem;
-}
-
-    .in-out-time div {
-        margin: 0 0.5rem;
-    }
-
-
-/*----- 臉部偵測頁 ---------*/
-.faceDetect-pannel {
-    display:none;
-    background-color: white;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
-    padding: 0 1rem;
-    color: #555;
 }
 
 /*偵測到的全圖*/
@@ -60,7 +84,7 @@
 
 .detect-full-img img {
     display: block;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -72,42 +96,32 @@
 .detect-part-img {
     display:block;
     margin:0 auto;
-    float:left;
-    width:25%;
-    padding:0.1rem 0.25rem;
+    width:100%;
+    padding:0.5rem 0;
 }
 
-/*偵測結果*/
-.result-row {
-    padding-left:0.5rem;
-    padding-right:0.5rem;
-    padding-bottom:1rem;
+
+/*--- 右側 Bar圖表--- */
+.grid-1{
+  border:none;
+  padding:1rem 0.5rem;
 }
 
-.result-content {
-    padding: 1rem 0.5rem;
-    border: 1px solid #8CC540;
-    border-radius:10px;
+.barChart {
+    width: 100%;
+    padding: 1rem 0;
 }
 
 /*--- RWD width<1025 ----*/
 @media (max-width:1025px) {
 }
 /* width<768*/
-@media (max-width:769px) {
-    /*桌號*/
-    .tableNum {
-        font-size: 1.2rem;
-    }
+@media (max-width:769px) {   
 
     /*進出場時間*/
     .in-out-time {
         font-size: 1rem;
     }
-
-        .in-out-time div {
-            margin: 0 1rem;
-        }
 
     /*偵測到的全圖*/
     .detect-full-img img {
@@ -116,27 +130,22 @@
 
     /*偵測到的小圖*/
     .detect-part-img {
-       
+        border-radius: 50%;
     }
+
+    .all-opinions {
+        float: right;
+        width: 10%;
+    }
+   
 
 }
 /* width<375*/
-@media (max-width:376px) {
-
-    /*桌號*/
-    .tableNum {
-        font-size: 1rem;
-        padding-left: 0.5rem;
-    }
+@media (max-width:376px) {  
 
     /*進出場時間*/
     .in-out-time {
     }
-
-        .in-out-time div {
-            margin: 0 0.2rem;
-        }
-
 
     /*偵測到的全圖*/
     .detect-full-img img {
@@ -144,7 +153,22 @@
     }
     /*偵測到的小圖*/
     .detect-part-img {
-        width:50%;
-        padding:0.2rem;
+        width: 200px;
+    }
+
+    .aspect-stat .all-opinions {
+        float: right;
+        width: 10%;
+    }
+    .aspect-name{
+        font-size:1.5rem;
+        top:2.5rem;
+    }
+
+    /*pie的百分比數字*/
+    .pie-value {
+        font-size: 1.1rem;
+        color: #7ED321;
+        font-weight: 600;
     }
 }

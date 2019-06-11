@@ -1,0 +1,96 @@
+﻿body {
+    font-family: 'Montserrat-Regular', Arial, 文泉驛正黑,"儷黑 Pro", "LiHei Pro", 微軟正黑體, 標楷體, DFKai-SB, sans-serif !important;
+    font-size:1rem;
+}
+
+/*白板底的pannel*/
+.whiteCard-pannel {
+    background-color: white;
+    margin: 1rem auto;
+    border-radius: 4px;
+    /*box-shadow: 0 1px 1px rgba(0,0,0,.05);*/
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+    padding: 0 1rem;
+    color:#555;
+}
+
+/*footer*/
+.copy {
+    color: gray;
+}
+
+/*=====右上 administrator區======*/
+.drop-men{
+    padding:1rem;
+}
+
+/*=====左上角的 logo區=======*/
+.navbar-header {
+    background-color: #ff9900;
+}
+
+/*logo文字*/
+.navbar-header h1 a.navbar-brand {
+    background-color: #ff9900;
+}
+    .navbar-header h1 a.navbar-brand:hover {
+        background-color: #FBAA19;
+    }
+
+ /*RWD的漢堡鍵*/
+.navbar-default .navbar-toggle {
+    border-color: #1ABC9C;
+    background-color: #1ABC9C !important;
+}
+
+
+/*====== 左側-navbar =========*/
+
+.sidebar ul li a {
+    color: #999;
+    padding: 0.6rem 0.5rem;
+    font-size: 1.25rem;
+}
+
+i.nav_icon {
+    color: #999;
+}
+
+/*移到子選單，彈出的樣式*/
+.hvr-bounce-to-right::before {
+    background-color: #1ABC9C;
+    right: 75%;
+}
+
+
+/*--- RWD width<1025 ----*/
+@media (max-width:1025px) {
+}
+    /* width<768*/
+    @media (max-width:769px) {
+        /*上面的search bar*/
+        .navbar-left-right {
+            margin-left: 1%;
+        }
+
+    }
+    /* width<375*/
+    @media (max-width:376px) {
+
+        /*=====左上角的 logo區======-*/
+        .navbar-header h1 a.navbar-brand {
+            padding-left: 1rem;
+        }
+
+        /*====== 左側-navbar =========*/
+        .sidebar ul li a {
+            padding: 0.2rem 0.5rem;
+            font-size:1rem;
+        }
+
+        /*移到子選單，彈出的樣式*/
+        .hvr-bounce-to-right::before {
+            background-color: #1ABC9C;
+            right: 82%;
+        }
+    }
