@@ -548,6 +548,7 @@
     <Compile Include="Models\DaySale.cs">
       <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mCustomerSatisfaction.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
@@ -636,7 +637,7 @@
     <Content Include="Views\Home\Region.cshtml" />
     <Content Include="Views\Home\SingleProduct.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Home\customerSatisfaction.cshtml" />
+    <Content Include="Views\Home\CustomerSatisfaction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
