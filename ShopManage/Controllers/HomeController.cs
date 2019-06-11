@@ -25,7 +25,8 @@ namespace ShopManage.Controllers
         // GET: Region
         public ActionResult Region()
         {
-            return View(dc.RegionSales());
+            TempData["RegionSales"] = dc.RegionSales();
+            return View();
         }
 
         // GET: SingleProduct

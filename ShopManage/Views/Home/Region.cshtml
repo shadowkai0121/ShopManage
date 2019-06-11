@@ -3,8 +3,7 @@
     ViewBag.Title = "Region";
     ViewBag.ChineseTitleName = "區域熱度";
 }
-
-
+@model string
 
 <div class="content-top">
     <div class="col-md-12">
@@ -32,97 +31,86 @@
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
-        // 參數設定
-        var param = {
-            // svg 大小
-            width: 600,
-            height: 400,
-            // 中心位置(經緯度)
-            center: [123, 23],
-            // 地圖縮放
-            scale: 5000,
-            // 可自由增減數量
-            // 資料級距
-            domain: [3000000, 15000000, 300000000],
-            // 級距顏色
-            coloreRange: ["#090", 'blue', "#f00"],
-            hover: "#FFDC35"
-        }
+    // 參數設定
+    var param = {
+        // svg 大小
+        width: 600,
+        height: 400,
+        // 中心位置(經緯度)
+        center: [123, 23],
+        // 地圖縮放
+        scale: 5000,
+        // 可自由增減數量
+        // 資料級距
+        domain: [0, 60000],
+        // 級距顏色
+        coloreRange: ["#FFCCCC", "#FF0000"],
+        hover: "#FFDC35"
+    }
 
-        // 資料庫數據
-        var data = new Array()
-        d3.json('../money.json', (money) => {
-            money.forEach(element => {
-                if (element.縣市別 == '合計') {
-                    return
-                }
-                // 可以用中文!!!!!!!
-                data[element.縣市別] = element.合計
-            });
-        })
+    var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
+    // 繪製地圖
+    $(function () {
+        var svg = d3.select("#region").append("svg")
+            // .attr("class", "svgback")
+            .attr("width", param.width)
+            .attr("height", param.height);
 
-        // 繪製地圖
-        $(function () {
-            var svg = d3.select("#region").append("svg")
-                // .attr("class", "svgback")
-                .attr("width", param.width)
-                .attr("height", param.height);
+        // 投影設定
+        var projection = d3.geo.mercator()
+            .center(param.center)
+            .scale(param.scale);
 
-            // 投影設定
-            var projection = d3.geo.mercator()
-                .center(param.center)
-                .scale(param.scale);
+        var path = d3.geo.path()
+            .projection(projection);
 
-            var path = d3.geo.path()
-                .projection(projection);
+        // 讀取地圖資料
+        d3.json("../taiwan.json", function (error, topology) {
+            var g = svg.append("g");
 
-            // 讀取地圖資料
-            d3.json("../taiwan.json", function (error, topology) {
-                var g = svg.append("g");
+            // objects 後面參數參考topojson內的object欄位
+            var features = topojson.feature(topology, topology.objects.County_MOI_1060525).features
 
-                // objects 後面參數參考topojson內的object欄位
-                var features = topojson.feature(topology, topology.objects.County_MOI_1060525).features
+            // 縣市/行政區界線
+            d3.select("svg").append("path").datum(
+                topojson.mesh(topology,
+                    topology.objects["County_MOI_1060525"],
+                    function (a,
+                        b) {
+                        return a !== b;
+                    })).attr("d", path)
+                .attr("class", "boundary");
 
-                // 縣市/行政區界線
-                d3.select("svg").append("path").datum(
-                    topojson.mesh(topology,
-                        topology.objects["County_MOI_1060525"],
-                        function (a,
-                            b) {
-                            return a !== b;
-                        })).attr("d", path)
-                    .attr("class", "boundary");
+            // 寫入資料庫
+            for (i = features.length - 1; i >= 0; i--) {
+                features[i].properties.money = data[features[i].properties.COUNTYNAME];
+            }
 
-                // 寫入資料庫數據
-                for (let i = 0; i < features.length; i++) {
-                    features[i].properties.money = data[features[i].properties.COUNTYNAME]
-                }
+            // 顏色設定
+            var color = d3.scale.linear().domain(param.domain).range(param.coloreRange)
+            d3.select("g").selectAll("path")
+                .data(features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .attr({
+                    d: path,
+                    name: function (d) {
+                        console.log(d.COUNTYNAME)
+                        return d.COUNTYNAME;
+                    },
+                    fill: function (d) {
+                        return color(d.properties.money)
+                    },
+                })
+                .on("mouseover", function (d) {
+                    d3.select(this).attr("fill", param.hover);
 
-                // 顏色設定
-                var color = d3.scale.linear().domain(param.domain).range(param.coloreRange)
-                d3.select("g").selectAll("path")
-                    .data(features)
-                    .enter()
-                    .append("path")
-                    .attr("d", path)
-                    .attr({
-                        d: path,
-                        name: function (d) {
-                            return d.properties["COUNTYNAME"];
-                        },
-                        fill: function (d) {
-                            return color(d.properties.money)
-                            console.log(d.properties.money);
-                        },
-                    })
-                    .on("mouseover", function (d) {
-                        d3.select(this).attr("fill", param.hover);
-
-                    }).on("mouseleave", function (d) {
-                        d3.select(this).attr("fill", () => {
-                            return color(d.properties.money)
-                        });
+                }).on("mouseleave", function (d) {
+                    d3.select(this).attr("fill", () => {
+                        return color(d.properties.money)
                     });
-            });
-        })
+                });
+        });
+    })
 </script>
