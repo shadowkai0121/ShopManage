@@ -15,3 +15,7 @@
   - Orinal
 
     > ~~*無修正版*~~ 原版頁面  
+            
+[完成部份]
+* masterpage.html、  _Layout2.cshtml  主版頁面
+* customerSatisfaction.html  顧客滿意度分析
