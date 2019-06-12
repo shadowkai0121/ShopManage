@@ -5,10 +5,10 @@
 }
 
 <div class="content-top">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="content-top-1">
             <div id="legend" class="top-content">
-
+                <div class="top-content" style="margin-left: 3%;">區域銷售額：(萬)</div>
             </div>
             <div id="region" class="top-content1">
             </div>
@@ -16,12 +16,9 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div id="ranking" class="content-top-1">
             <span>Gild he like high wandered for womans wassailers none did een native love was longdeserted vaunted in he blazon glee</span>
-        </div>
-        <div id="donut" class="content-top-1">
-            <span>Fall to a harolds monastic sore companie of in feud monks harold he third be who the in flee later</span>
         </div>
     </div>
 </div>
@@ -43,37 +40,33 @@
     // 參數設定
     var param = {
         // svg 大小
-        width: 600,
-        height: 400,
+        width: 800,
+        height: 500,
         // 中心位置(經緯度)
-        center: [123, 23],
+        center: [121.5, 23.5],
         // 地圖縮放
-        scale: 5000,
+        scale: 7000,
         // 可自由增減數量
         // 資料級距
-        domain: [30000,60000],
+        domain: [20000,60000],
         // 級距顏色
         coloreRange: ["#FFCCCC", "#FF0000"],
         hover: "#FFDC35"
     }
     var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
 
-
-    // 顏色設定
-    //var color = d3.scale.linear()
-    //    .domain(param.domain)
-    //    .range(param.coloreRange)
+    var color = d3.scaleLinear()
+        .domain(param.domain)
+        .range(param.coloreRange)
 
     $(function () {
+        // 圖例
         d3.select('#legend').append('svg')
             .attr('width', param.width)
             .attr('height', 60)
             .attr('id', 'legendSvg')
 
         var svgLegend = d3.select('#legendSvg')
-        var color = d3.scaleLinear()
-            .domain(param.domain)
-            .range(param.coloreRange)
 
         svgLegend.append('g')
             .attr('class', 'legend')
