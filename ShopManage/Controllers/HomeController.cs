@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using ShopManage.Models;
 namespace ShopManage.Controllers
 {
     public class HomeController : Controller
     {
+        DataCleaning dc = new DataCleaning();
         // GET: Home
         public ActionResult Index()
         {
@@ -23,6 +25,8 @@ namespace ShopManage.Controllers
         // GET: Region
         public ActionResult Region()
         {
+            TempData["RegionSales"] = dc.RegionSales();
+            TempData["Domain"] = dc.DrawDomain();
             return View();
         }
 
