@@ -65,7 +65,7 @@
 
         // 讀取地圖資料
         d3.json("../taiwan.json", function (error, topology) {
-            var g = svg.append("g");
+            svg.append("g");
 
             // objects 後面參數參考topojson內的object欄位
             var features = topojson.feature(topology, topology.objects.County_MOI_1060525).features
@@ -110,6 +110,17 @@
                         return color(d.properties.money)
                     });
                 });
+
+            // 產生圖例
+            var log = d3.scaleColor()
+                .domain(param.domain)
+                .range(param.coloreRange)
+
+            svg.append('L')
+                .attr('class', 'legendLog')
+                .attr('transform', 'translate(20, 20)')
+
+
         });
     })
 </script>
