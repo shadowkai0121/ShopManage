@@ -3,7 +3,6 @@
     ViewBag.Title = "Region";
     ViewBag.ChineseTitleName = "區域熱度";
 }
-@model string
 
 <div class="content-top">
     <div class="col-md-6">
@@ -16,6 +15,9 @@
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6">
+
     </div>
 </div>
 <div class="clearfix"></div>
@@ -126,29 +128,10 @@
                 .attr('name', function (d) { return d.properties.COUNTYNAME })
                 .attr('fill', function (d) { return color(d.properties.money) })
                 .on('mouseover', function () { d3.select(this).attr('fill', param.hover) })
-                .on('mouseout', function (d) {
+                .on('mouseout', function () {
                     d3.select(this).attr('fill',
                         function (d) { return color(d.properties.money) })
                 })
-                //.attr({
-                //    d: path,
-                //    name: function (d, i) {
-                //        console.log(d.properties.COUNTYNAME)
-                //        return d.properties.COUNTYNAME;
-                //    },
-                //    fill: function (d, i) {
-                //        console.log(d.properties.money)
-                //        return color(d.properties.money)
-                //    },
-                //})
-                //.on("mouseover", function (d) {
-                //    d3.select(this).attr("fill", param.hover);
-                //})
-                //.on("mouseout", function (d) {
-                //    d3.select(this).attr("fill", () => {
-                //        return color(d.properties.money)
-                //    });
-                //});
-        });
+          });
     })
 </script>

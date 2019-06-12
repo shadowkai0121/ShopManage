@@ -14,23 +14,6 @@ namespace ShopManage.Models
             return JsonConvert.SerializeObject(regionSales());
         }
 
-        public int?[] DrawDomain(int steps = 2)
-        {
-            int?[] domain = new int?[steps];
-            domain[0] = regionSales().Values.Min();
-            domain[steps - 1] = regionSales().Values.Max();
-            int? range = domain[steps - 1] - domain[0];
-            if (steps > 2)
-            {
-                for (int i = 1; i < steps - 1; i++)
-                {
-                    domain[i] = domain[0] + (i / steps) * range;
-                }
-            }
-
-            return domain;
-        }
-
         private Dictionary<string, int?> regionSales()
         {
             Dictionary<string, int?> data = new Dictionary<string, int?>();

@@ -26,7 +26,6 @@ namespace ShopManage.Controllers
         public ActionResult Region()
         {
             TempData["RegionSales"] = dc.RegionSales();
-            TempData["Domain"] = dc.DrawDomain();
             return View();
         }
 
