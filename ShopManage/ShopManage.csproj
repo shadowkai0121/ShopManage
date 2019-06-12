@@ -116,6 +116,8 @@
     <Content Include="css\calendar.css" />
     <Content Include="css\clndr.css" />
     <Content Include="css\custom.css" />
+    <Content Include="css\customerSatisfaction.css" />
+    <Content Include="css\customerTab.css" />
     <Content Include="css\custom_1.css" />
     <Content Include="css\examples.css" />
     <Content Include="css\font-awesome.css" />
@@ -125,6 +127,10 @@
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\style.css" />
     <Content Include="css\swipebox.css" />
+    <Content Include="detectImg\0.jpg" />
+    <Content Include="detectImg\1.jpg" />
+    <Content Include="detectImg\2.jpg" />
+    <Content Include="detectImg\a1.jpg" />
     <Content Include="fonts\._fontawesome-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -542,6 +548,7 @@
     <Compile Include="Models\DaySale.cs">
       <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mCustomerSatisfaction.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
@@ -630,7 +637,7 @@
     <Content Include="Views\Home\Region.cshtml" />
     <Content Include="Views\Home\SingleProduct.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="taiwan.json" />
+    <Content Include="Views\Home\CustomerSatisfaction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

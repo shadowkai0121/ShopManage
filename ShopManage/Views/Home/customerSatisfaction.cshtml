@@ -1,0 +1,698 @@
+﻿
+@{
+    ViewBag.Title = "CustomerSatisfaction";
+    ViewBag.ChineseTitleName = "顧客滿意度";
+}
+
+<!--此頁加入的css-->
+<link href="~/css/customerTab.css" rel="stylesheet" />
+<link href="~/css/customerSatisfaction.css" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+<!--customerSatisfaction的pie chart-->
+<script src="~/js/pie-chart.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    // Create a client instance
+    client = new Paho.MQTT.Client("postman.cloudmqtt.com", 36026, "web_" + parseInt(Math.random() * 100, 10));
+
+    // set callback handlers
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+    var options = {
+        useSSL: true,
+        userName: "whfzidsr",
+        password: "KWkz8k2GfsYE",
+        onSuccess: onConnect,
+        onFailure: doFail
+    }
+
+    // connect the client
+    client.connect(options);
+
+    // called when the client connects
+    function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        console.log("onConnect");
+        client.subscribe("cloudmqtt");
+    }
+
+    function doFail(e) {
+        console.log(e);
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+            console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+    }
+
+    function smileIndex(smile) {
+        if (smile >= 0.75) { return "滿意"; }
+        else if (smile <= 0.25) { return "不滿意"; }
+        else { return "普通"; }
+    }
+
+    function paddingLeft(str) {
+        if (str.length >= 2) { return str; }
+        else { return paddingLeft('0' + str); }
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+        var str = message.payloadString;
+        //收到新訊息後清空個人照片
+        $('.selfFace').children().remove();
+        //拍照時間-20分鐘為抵達時間
+        var arriveMin = parseInt(str.substr(8, 2)) * 60 + parseInt(str.substr(10, 2)) - 20;
+        var hh = Math.floor(arriveMin / 60).toString();
+        var mm = (arriveMin % 60).toString();
+        var arriveTime = paddingLeft(hh) + ':' + paddingLeft(mm);
+        document.getElementById("arriveTime").innerText = arriveTime;
+        //離場時間
+        var leaveTime = str.substr(12, 2) + ':' + str.substr(14, 2);
+        document.getElementById("leaveTime").innerText = leaveTime;
+        //人的編號對應的微笑指數存入物件，產生JSON
+        var objPeople = "";
+        var smilingIndex = [];
+        var numPeople = parseInt(str.substr(16, 1));
+        document.getElementById("numPeople").innerText = numPeople;
+        for (var i = 0; i < numPeople; i++) {
+            //找出每張笑容指數的起始點
+            //將每個s的index放進陣列
+            var indexes = [], s;
+            for (s = 0; s < str.length; s++) {
+                if (str[s] == 's') { indexes.push(s); }
+            }
+            //將每個微笑指數放進smilingIndex[]
+            var smile = parseFloat(str.substring(indexes[i] + 1, indexes[i + 1]));
+            smilingIndex.push(smile);
+            var sPeople = '"' + i.toString() + '"' + ':' + '"' + smilingIndex[i].toString() + '"';
+            objPeople = objPeople + sPeople + ',';
+        }
+        var date = str.substr(0, 8);
+        var objPeople = '{' + objPeople.substr(0, objPeople.length - 1) + '}';
+        var deskObj = {
+            "desk": "5",
+            "date": date,
+            "numPeople": numPeople,
+            "arriveTime": arriveTime,
+            "leaveTime": leaveTime,
+            "smileIdx": JSON.parse(objPeople)
+        };
+        //整桌的照片
+        var webDir = 'http://wonras.local:8000/shop/desk5/' + str.substr(0, 12);
+        document.getElementById('tabImg').src = webDir + '/00.jpg';
+        //把每張照片放進HTML之前 先分類是滿意、普通還是不滿意
+        var satisfactory = 0, unsatisfactory = 0, medium = 0;
+        for (var i = 0; i < numPeople; i++) {
+            //每張臉的滿意度 每張臉的照片放進html
+            var selfFaceDivId = "";
+            switch (smileIndex(deskObj["smileIdx"][i])) {
+                case "滿意":
+                    selfFaceDivId = "satisfactoryIMG";
+                    satisfactory++;
+                    break;
+                case "不滿意":
+                    selfFaceDivId = "unsatisfactoryIMG";
+                    unsatisfactory++;
+                    break;
+                case "普通":
+                    selfFaceDivId = "mediumIMG";
+                    medium++;
+                    break;
+            }
+            var faceImg = document.createElement('img');
+            faceImg.setAttribute("class", "detect-part-img");
+            faceImg.setAttribute("src", webDir + '/fIMG/' + i + '.jpg');
+            document.getElementById(selfFaceDivId).appendChild(faceImg);
+        }
+        //滿意、普通、不滿意的人數
+        var positive = document.querySelectorAll("[class='positive-count']");
+        var neutral = document.querySelectorAll("[class='neutral-count']");
+        var negative = document.querySelectorAll("[class='negative-count']");
+        for (var i = 0; i < positive.length; i++) {
+            positive[i].innerText = satisfactory;
+            neutral[i].innerText = medium;
+            negative[i].innerText = unsatisfactory;
+        };
+        //重製滿意度的pie
+        $("#aspect-info-1").html("").html('<div id="demo-pie-1" class="pie-title-center chart-content"> <span class="pie-value"></span></div><span class="aspect-name">桌號：12</span>');
+        var average = Math.floor((satisfactory / numPeople) * 100);
+        document.getElementById("demo-pie-1").setAttribute("data-percent", average);
+        $('#demo-pie-1').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'round',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, average) {
+                $(this.element).find('.pie-value').text(Math.round(average) + '%');
+            }
+        });
+    }
+</script>
+
+<div class="col-md-7">
+    <div id="aspect-content">
+        <!--tab1-->
+        <div class="aspect-tab ">
+            <input id="item-1" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-1" class="aspect-label"></label>
+            <div class="aspect-content">
+                <!--左邊-桌號+百分比-->
+                <div class="aspect-info" id="aspect-info-1">
+                    <!--百分比圖表-->
+                    <div id="demo-pie-1" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
+
+                    <span class="aspect-name">桌號：12</span>
+                </div>
+                <!--右邊-人數-->
+                <div class="aspect-stat">
+                    <div class="all-opinions">
+                        <span class="all-opinions-count" id="numPeople">4</span>
+                        <span>位</span>
+                    </div>
+                    <div>
+                        <span class="positive-count">2</span>
+                        <span class="neutral-count">1</span>
+                        <span class="negative-count">1</span>
+                    </div>
+                </div>
+            </div>
+            <!--start tabs展開後的內容-->
+            <div class="aspect-tab-content">
+                <div class="in-out-time col-md-12">
+                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span id="arriveTime">12:47</span></div>
+                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span id="leaveTime">15:34</span></div>
+                </div>
+                <!--start 偵測到的大圖-->
+                <div class="full-img-row">
+                    <div class="detect-full-img">
+                        <img id="tabImg" src="~/detectImg/a1.jpg" />
+                    </div>
+                </div>
+                <!--//end 偵測到的大圖-->
+                <!--start 偵測到的小圖-->
+                <div class="sentiment-wrapper">
+                    <div>
+                        <div class="col-md-4">
+                            <div class="positive-count opinion-header">
+                                <span>滿意</span>
+                                <span class="positive-count">2</span>
+                            </div>
+                            <div class="selfFace" id="satisfactoryIMG">
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="neutral-count opinion-header">
+                                <span>普通</span>
+                                <span class="neutral-count">1</span>
+                            </div>
+                            <div class="selfFace" id="mediumIMG">
+                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="negative-count opinion-header">
+                                <span>不滿意</span>
+                                <span class="negative-count">1</span>
+                            </div>
+                            <div class="selfFace" id="unsatisfactoryIMG">
+                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//end 偵測到的小圖-->
+            </div>
+            <!--//end tabs展開後的內容-->
+        </div>
+        <!--tab2-->
+        <div class="aspect-tab ">
+            <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-2" class="aspect-label"></label>
+            <div class="aspect-content">
+                <!--左邊-桌號+百分比-->
+                <div class="aspect-info">
+                    <!--百分比圖表-->
+                    <div id="demo-pie-2" class="pie-title-center chart-content" data-percent="66.67"> <span class="pie-value"></span> </div>
+
+                    <span class="aspect-name">桌號：4</span>
+                </div>
+                <!--右邊-人數-->
+                <div class="aspect-stat">
+                    <div class="all-opinions">
+                        <span class="all-opinions-count">3</span>
+                        <span>位</span>
+                    </div>
+                    <div>
+                        <span class="positive-count">2</span>
+                        <span class="neutral-count">1</span>
+                        <span class="negative-count">0</span>
+                    </div>
+                </div>
+            </div>
+            <!--start tabs展開後的內容-->
+            <div class="aspect-tab-content">
+                <div class="in-out-time col-md-12">
+                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:55</span></div>
+                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>13:12</span></div>
+                </div>
+                <!--start 偵測到的大圖-->
+                <div class="full-img-row">
+                    <div class="detect-full-img">
+                        <img src="~/detectImg/a1.jpg" />
+                    </div>
+                </div>
+                <!--//end 偵測到的大圖-->
+                <!--start 偵測到的小圖-->
+                <div class="sentiment-wrapper">
+                    <div>
+                        <div class="col-md-4">
+                            <div class="positive-count opinion-header">
+                                <span>滿意</span>
+                                <span>2</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="neutral-count opinion-header">
+                                <span>普通</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="negative-count opinion-header">
+                                <span>不滿意</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//end 偵測到的小圖-->
+            </div>
+            <!--//end tabs展開後的內容-->
+        </div>
+        <!--tab3-->
+        <div class="aspect-tab ">
+            <input id="item-3" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-3" class="aspect-label"></label>
+            <div class="aspect-content">
+                <!--左邊-桌號+百分比-->
+                <div class="aspect-info">
+                    <!--百分比圖表-->
+                    <div id="demo-pie-3" class="pie-title-center chart-content" data-percent="100"> <span class="pie-value"></span> </div>
+
+                    <span class="aspect-name">桌號：2</span>
+                </div>
+                <!--右邊-人數-->
+                <div class="aspect-stat">
+                    <div class="all-opinions">
+                        <span class="all-opinions-count">2</span>
+                        <span>位</span>
+                    </div>
+                    <div>
+                        <span class="positive-count">2</span>
+                        <span class="neutral-count">0</span>
+                        <span class="negative-count">0</span>
+                    </div>
+                </div>
+            </div>
+            <!--start tabs展開後的內容-->
+            <div class="aspect-tab-content">
+                <div class="in-out-time col-md-12">
+                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:47</span></div>
+                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>14:12</span></div>
+                </div>
+                <!--start 偵測到的大圖-->
+                <div class="full-img-row">
+                    <div class="detect-full-img">
+                        <img src="~/detectImg/a1.jpg" />
+                    </div>
+                </div>
+                <!--//end 偵測到的大圖-->
+                <!--start 偵測到的小圖-->
+                <div class="sentiment-wrapper">
+                    <div>
+                        <div class="col-md-4">
+                            <div class="positive-count opinion-header">
+                                <span>滿意</span>
+                                <span>2</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="neutral-count opinion-header">
+                                <span>普通</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="negative-count opinion-header">
+                                <span>不滿意</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//end 偵測到的小圖-->
+            </div>
+            <!--//end tabs展開後的內容-->
+        </div>
+
+        <!--tab4-->
+        <div class="aspect-tab ">
+            <input id="item-4" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-4" class="aspect-label"></label>
+            <div class="aspect-content">
+                <!--左邊-桌號+百分比-->
+                <div class="aspect-info">
+                    <!--百分比圖表-->
+                    <div id="demo-pie-4" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
+
+                    <span class="aspect-name">桌號：6</span>
+                </div>
+                <!--右邊-人數-->
+                <div class="aspect-stat">
+                    <div class="all-opinions">
+                        <span class="all-opinions-count">4</span>
+                        <span>位</span>
+                    </div>
+                    <div>
+                        <span class="positive-count">2</span>
+                        <span class="neutral-count">2</span>
+                        <span class="negative-count">0</span>
+                    </div>
+                </div>
+            </div>
+            <!--start tabs展開後的內容-->
+            <div class="aspect-tab-content">
+                <div class="in-out-time col-md-12">
+                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:32</span></div>
+                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>14:02</span></div>
+                </div>
+                <!--start 偵測到的大圖-->
+                <div class="full-img-row">
+                    <div class="detect-full-img">
+                        <img src="~/detectImg/a1.jpg" />
+                    </div>
+                </div>
+                <!--//end 偵測到的大圖-->
+                <!--start 偵測到的小圖-->
+                <div class="sentiment-wrapper">
+                    <div>
+                        <div class="col-md-4">
+                            <div class="positive-count opinion-header">
+                                <span>滿意</span>
+                                <span>2</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="neutral-count opinion-header">
+                                <span>普通</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="negative-count opinion-header">
+                                <span>不滿意</span>
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//end 偵測到的小圖-->
+            </div>
+            <!--//end tabs展開後的內容-->
+        </div>
+
+        <!--tab5-->
+        <div class="aspect-tab ">
+            <input id="item-5" type="checkbox" class="aspect-input" name="aspect">
+            <label for="item-5" class="aspect-label"></label>
+            <div class="aspect-content">
+                <!--左邊-桌號+百分比-->
+                <div class="aspect-info">
+                    <!--百分比圖表-->
+                    <div id="demo-pie-5" class="pie-title-center chart-content" data-percent="100"> <span class="pie-value"></span> </div>
+
+                    <span class="aspect-name">桌號：10</span>
+                </div>
+                <!--右邊-人數-->
+                <div class="aspect-stat">
+                    <div class="all-opinions">
+                        <span class="all-opinions-count">3</span>
+                        <span>位</span>
+                    </div>
+                    <div>
+                        <span class="positive-count">3</span>
+                        <span class="neutral-count">0</span>
+                        <span class="negative-count">0</span>
+                    </div>
+                </div>
+            </div>
+            <!--start tabs展開後的內容-->
+            <div class="aspect-tab-content">
+                <div class="in-out-time col-md-12">
+                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:15</span></div>
+                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>13:11</span></div>
+                </div>
+                <!--start 偵測到的大圖-->
+                <div class="full-img-row">
+                    <div class="detect-full-img">
+                        <img src="~/detectImg/a1.jpg" />
+                    </div>
+                </div>
+                <!--//end 偵測到的大圖-->
+                <!--start 偵測到的小圖-->
+                <div class="sentiment-wrapper">
+                    <div>
+                        <div class="col-md-4">
+                            <div class="positive-count opinion-header">
+                                <span>滿意</span>
+                                <span>3</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="neutral-count opinion-header">
+                                <span>普通</span>
+                                <span>0</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            <div class="negative-count opinion-header">
+                                <span>不滿意</span>
+                                <span>0</span>
+                            </div>
+                            <div>
+                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--//end 偵測到的小圖-->
+            </div>
+            <!--//end tabs展開後的內容-->
+        </div>
+    </div>
+</div>
+
+<!--start 圖表 Bar-->
+<div class="col-md-5">
+    <div class="whiteCard-pannel">
+        <div class="grid-1">
+            <h4>本月滿意度</h4>
+            <div class="barChart">
+                <canvas id="customerBar"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById('customerBar').getContext('2d');
+
+
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['滿意', '普通', '不滿意'],
+                        datasets: [{
+                            label: '',
+                            data: [88, 40, 11],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        //圖例區----------------
+                        legend: {
+                            display: false
+                        },
+
+
+                        scales: {
+                            xAxes: [{
+
+                            }],
+
+
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+            </script>
+        </div>
+
+
+    </div>
+
+</div>
+<!--//end 圖表 Bar-->
+<!---->
+<div class="content-mid">
+
+    <!--內容2-->
+    <div class="clearfix"> </div>
+</div>
+<!----->
+<div class="content-bottom">
+
+    <!--內容3-->
+
+    <div class="clearfix"> </div>
+</div>
+
+<!--此頁面的js-->
+<!--pie-chart--->
+<script>
+
+    $(document).ready(function () {
+        $('#demo-pie-1').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'round',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-2').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'butt',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-3').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'square',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-4').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'square',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+
+        $('#demo-pie-5').pieChart({
+            barColor: '#7ED321',
+            trackColor: '#eee',
+            lineCap: 'square',
+            lineWidth: 8,
+            size: 65,
+            onStep: function (from, to, percent) {
+                $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+            }
+        });
+    });
+
+</script>
