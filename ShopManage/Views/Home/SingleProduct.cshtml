@@ -1,17 +1,18 @@
-﻿
+﻿@model List<ShopManage.Models.Order>
 @{
     ViewBag.Title = "SingleProduct";
     ViewBag.ChineseTitleName = "單品分析";
 }
 
-
-
-
 <div class="content-top">
     <div class="col-md-12">
         <div class="content-top-1">
             <div class="top-content1">
-                <h1>Way flash festal him womans to that these from soils deem nor and plain said but soils which his who his caught and that from goodly he lines sister a me it breast who albions sins of and wins not to sad dwelt and a at know childe in not crime by his in me birth lineage shrine in to long this adieu glee lyres memory scape start feel but might pleasure peace was soon thence nor mother sighed shamed deadly in monastic partings yet and for or nor talethis companie he atonement sick flash would scape friends from and</h1>
+                <div id="chartjs" class="col-md-3">
+                </div>
+                <div>
+                    <canvas id="myChart" class="col-md-3" width="600" height="600"></canvas>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -19,4 +20,145 @@
     </div>
 </div>
 <div class="clearfix"></div>
+
+<style>
+    #myChart {
+        position: absolute;
+        right: 30px;
+        top: 13px;
+        height: 550px !important;
+        width: 600px !important;
+    }
+    #chartjs{
+        /*position: fixed;*/
+    }
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+<script>
+    var options = {
+        chart: {
+            width: 600,
+            height: 570,
+            type: 'bar',
+            stacked: true,
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: true
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                legend: {
+                    position: 'bottom',
+                    offsetX: -10,
+                    offsetY: 0
+                }
+            }
+        }],
+        plotOptions: {
+            bar: {
+                horizontal: false,
+            },
+        },
+        "xaxis": {},
+        legend: {
+            "position": "bottom"
+        },
+        "fill": {
+            "opacity": 1
+        },
+        series: [{
+            name: '前菜',
+            data: [@Model[1].TotalPrice, 55, 41, 67]
+        }, {
+            name: '主菜',
+            data: [13, 23, 20, 8]
+        }, {
+            name: '湯品',
+            data: [11, 17, 15, 15,]
+        }, {
+            name: '飲料',
+            data: [21, 7, 25, 13,]
+        }, {
+            name: '甜點',
+            data: [21, 7, 25, 13,]
+        }
+        ],
+        xaxis: {
+            categories: ['Season one', 'Season two', 'Season third', 'Fourth season'],
+        },
+        legend: {
+            position: 'right',
+            offsetY: 40
+        },
+        fill: {
+            opacity: 1
+        },
+    }
+
+    var chart = new ApexCharts(
+        document.querySelector("#chartjs"),
+        options
+    );
+
+    chart.render();
+
+</script>
+
+
+<script>
+    Chart.defaults.global.defaultFontSize = 40;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['top 1', 'top 2', 'top 3', 'top 4', 'top 5'],
+            datasets: [{
+                scaleStartValue: 10,
+                label: '當月銷售',
+                data: [6, 19, 3, 5, 2],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+
+                ],
+                borderWidth: 5,
+            }]
+        },
+        options:
+        {
+            legend: {
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                }],
+                yAxes: [{
+                    stacked: true,
+
+                }]
+            }
+        }
+    });
+</script>
 

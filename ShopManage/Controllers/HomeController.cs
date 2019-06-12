@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopManage.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace ShopManage.Controllers
 {
     public class HomeController : Controller
     {
+        SMIT09Entities db = new SMIT09Entities();
+
         // GET: Home
         public ActionResult Index()
         {
@@ -26,10 +29,26 @@ namespace ShopManage.Controllers
             return View();
         }
 
+
         // GET: SingleProduct
         public ActionResult SingleProduct()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult SingleProduct(Order order)
+        {
+            var query = from o in db.Orders
+                        orderby o.TotalPrice
+                        select o;
+
+
+            return View(query.ToList());
+        }
+
+
+
+
     }
 }
