@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="UTF-8">
+    <title>Incontra Itallia 管理系統</title>
+
+    <!--此頁面的css-->
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Login.css">
+
+</head>
+<body>
+    <div class="wrapper">
+        <form class="login">
+            <p class="title">使用者登入</p>
+            <input id="adminId" type="text" placeholder="帳號" autofocus />
+            <i class="fa fa-user"></i>
+            <input id="adminPw" type="password" placeholder="密碼" />
+            <i class="fa fa-key"></i>
+            <a href="#">忘記密碼?</a>
+            <button>
+                <!--loding會出現的轉圈圈-->
+                <i class="spinner"></i>
+                <span class="state">登入</span>
+            </button>
+        </form>
+        <footer><a>© 2019 Copyright Big Champion</a></footer>
+
+    </div>
+
+    <!--此頁面的js-->
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+
+
+        var working = false;
+        $('.login').on('submit', function (e) {
+            e.preventDefault();
+            if (working) return;
+            working = true;
+            var $this = $(this),
+                $state = $this.find('button > .state');
+            $this.addClass('loading');
+            $state.html('登入中...');
+
+            //判斷是否登入成功================================
+            var adminId = $('#adminId').val();
+            var adminPw = $('#adminPw').val();
+
+            if (adminId == "admin" && adminPw == "1234") {
+                //登入成功------
+                $this.addClass('ok');
+                $state.html('登入成功');
+
+                //等待1秒，再跳轉
+                setTimeout(function () {
+                    //導向到 index頁面
+                    document.location.href = '/Home/Index';
+                }, 1000);
+            }
+            else {
+                $this.addClass('fail');
+                $state.html('登入失敗..請重新輸入');
+            }
+
+
+
+            setTimeout(function () {
+                //最後才會執行的code----回到登入畫面--------
+                setTimeout(function () {
+                    $state.html('登入');
+                    $this.removeClass('ok loading');
+                    $this.removeClass('fail loading');
+                    working = false;
+
+                    //清空內容
+                    $('#adminId').val("");
+                    $('#adminPw').val("");
+
+                }, 1000); //秒數是影響到「最後回到登入」的畫面
+            }, 3000);  //包含「登入中..」的時間
+        });
+
+
+    </script>
+
+</body>
+</html>
