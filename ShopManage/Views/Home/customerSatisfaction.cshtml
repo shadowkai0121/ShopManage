@@ -95,7 +95,7 @@
         var date = str.substr(0, 8);
         var objPeople = '{' + objPeople.substr(0, objPeople.length - 1) + '}';
         var deskObj = {
-            "desk": "5",
+            "desk": "1",
             "date": date,
             "numPeople": numPeople,
             "arriveTime": arriveTime,
@@ -157,7 +157,7 @@
 
 <div class="col-md-7">
     <div id="aspect-content">
-        <!--tab1-->
+        <!--tab1 接收MQTT展示用-->
         <div class="aspect-tab ">
             <input id="item-1" type="checkbox" class="aspect-input" name="aspect">
             <label for="item-1" class="aspect-label"></label>
@@ -166,7 +166,6 @@
                 <div class="aspect-info" id="aspect-info-1">
                     <!--百分比圖表-->
                     <div id="demo-pie-1" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
-
                     <span class="aspect-name">桌號：1</span>
                 </div>
                 <!--右邊-人數-->
@@ -236,7 +235,7 @@
             </div>
             <!--//end tabs展開後的內容-->
         </div>
-        @{ int aa = 2; }
+        @{ int no = 2; }
         @foreach (var item in Model)
         {
             @functions{
@@ -285,13 +284,13 @@
             double average = Math.Round((satisfactory) / double.Parse(item.numPeople) * 100);
             <!--tab迴圈-->
             <div class="aspect-tab ">
-                <input id="item-@aa" type="checkbox" class="aspect-input" name="aspect">
-                <label for="item-@aa" class="aspect-label"></label>
+                <input id="item-@no" type="checkbox" class="aspect-input" name="aspect">
+                <label for="item-@no" class="aspect-label"></label>
                 <div class="aspect-content">
                     <!--左邊-桌號+百分比-->
-                    <div class="aspect-info" id="aspect-info-@aa">
+                    <div class="aspect-info" id="aspect-info-@no">
                         <!--百分比圖表-->
-                        <div id="demo-pie-@aa" class="pie-title-center chart-content" data-percent="@average"> <span class="pie-value"></span> </div>
+                        <div id="demo-pie-@no" class="pie-title-center chart-content" data-percent="@average"> <span class="pie-value"></span> </div>
                         <span class="aspect-name">桌號：@item.desk</span>
                     </div>
                     <!--右邊-人數-->
@@ -328,7 +327,7 @@
                                     <span>滿意</span>
                                     <span class="positive-count">@satisfactory</span>
                                 </div>
-                                <div class="selfFace-@aa" id="satisfactoryIMG">
+                                <div class="selfFace-@no" id="satisfactoryIMG">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
@@ -348,7 +347,7 @@
                                     <span>普通</span>
                                     <span class="neutral-count">@medium</span>
                                 </div>
-                                <div class="selfFace-@aa" id="mediumIMG">
+                                <div class="selfFace-@no" id="mediumIMG">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
@@ -369,7 +368,7 @@
                                     <span>不滿意</span>
                                     <span class="negative-count">@unsatisfactory</span>
                                 </div>
-                                <div class="selfFace-@aa" id="unsatisfactoryIMG">
+                                <div class="selfFace-@no" id="unsatisfactoryIMG">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
@@ -388,9 +387,9 @@
                 </div>
                 <!--//end tabs展開後的內容-->
             </div>
-            aa = aa + 1;
+            no = no + 1;
         }
-        <!--tab5-->
+        <!--tab迴圈結束-->
     </div>
 </div>
 <!--start 圖表 Bar-->
@@ -401,11 +400,8 @@
             <div class="barChart">
                 <canvas id="customerBar"></canvas>
             </div>
-
             <script>
                 var ctx = document.getElementById('customerBar').getContext('2d');
-
-
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -450,8 +446,6 @@
 
             </script>
         </div>
-
-
     </div>
 
 </div>
@@ -530,5 +524,4 @@
             }
         });
     });
-
 </script>
