@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 using ShopManage.Models;
 namespace ShopManage.Controllers
 {
@@ -38,7 +39,10 @@ namespace ShopManage.Controllers
         //顧客滿意度
         public ActionResult CustomerSatisfaction()
         {
-            return View();
+            mCustomerSatisfaction cs = new mCustomerSatisfaction();
+            List<Satisfaction> siList = cs.GetSmileIndex();
+
+            return View(siList);
         }
         
     }

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ShopManage.Models.Satisfaction>
 @{
     ViewBag.Title = "CustomerSatisfaction";
     ViewBag.ChineseTitleName = "顧客滿意度";
@@ -130,16 +130,16 @@
             document.getElementById(selfFaceDivId).appendChild(faceImg);
         }
         //滿意、普通、不滿意的人數
-        var positive = document.querySelectorAll("[class='positive-count']");
-        var neutral = document.querySelectorAll("[class='neutral-count']");
-        var negative = document.querySelectorAll("[class='negative-count']");
+        var positive = document.querySelectorAll("[id='positive-count-1']");
+        var neutral = document.querySelectorAll("[id='neutral-count-1']");
+        var negative = document.querySelectorAll("[id='negative-count-1']");
         for (var i = 0; i < positive.length; i++) {
             positive[i].innerText = satisfactory;
             neutral[i].innerText = medium;
             negative[i].innerText = unsatisfactory;
         };
         //重製滿意度的pie
-        $("#aspect-info-1").html("").html('<div id="demo-pie-1" class="pie-title-center chart-content"> <span class="pie-value"></span></div><span class="aspect-name">桌號：12</span>');
+        $("#aspect-info-1").html("").html('<div id="demo-pie-1" class="pie-title-center chart-content"> <span class="pie-value"></span></div><span class="aspect-name">桌號：1</span>');
         var average = Math.floor((satisfactory / numPeople) * 100);
         document.getElementById("demo-pie-1").setAttribute("data-percent", average);
         $('#demo-pie-1').pieChart({
@@ -167,7 +167,7 @@
                     <!--百分比圖表-->
                     <div id="demo-pie-1" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
 
-                    <span class="aspect-name">桌號：12</span>
+                    <span class="aspect-name">桌號：1</span>
                 </div>
                 <!--右邊-人數-->
                 <div class="aspect-stat">
@@ -176,9 +176,9 @@
                         <span>位</span>
                     </div>
                     <div>
-                        <span class="positive-count">2</span>
-                        <span class="neutral-count">1</span>
-                        <span class="negative-count">1</span>
+                        <span class="positive-count" id="positive-count-1">2</span>
+                        <span class="neutral-count" id="neutral-count-1">1</span>
+                        <span class="negative-count" id="negative-count-1">1</span>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                         <div class="col-md-4">
                             <div class="positive-count opinion-header">
                                 <span>滿意</span>
-                                <span class="positive-count">2</span>
+                                <span class="positive-count" id="positive-count-1">2</span>
                             </div>
                             <div class="selfFace" id="satisfactoryIMG">
                                 <img class="detect-part-img" src="~/detectImg/0.jpg" />
@@ -213,7 +213,7 @@
                         <div class="col-md-4">
                             <div class="neutral-count opinion-header">
                                 <span>普通</span>
-                                <span class="neutral-count">1</span>
+                                <span class="neutral-count" id="neutral-count-1">1</span>
                             </div>
                             <div class="selfFace" id="mediumIMG">
                                 <img class="detect-part-img" src="~/detectImg/1.jpg" />
@@ -224,7 +224,7 @@
                         <div class="col-md-4">
                             <div class="negative-count opinion-header">
                                 <span>不滿意</span>
-                                <span class="negative-count">1</span>
+                                <span class="negative-count" id="negative-count-1">1</span>
                             </div>
                             <div class="selfFace" id="unsatisfactoryIMG">
                                 <img class="detect-part-img" src="~/detectImg/2.jpg" />
@@ -236,327 +236,163 @@
             </div>
             <!--//end tabs展開後的內容-->
         </div>
-        <!--tab2-->
-        <div class="aspect-tab ">
-            <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
-            <label for="item-2" class="aspect-label"></label>
-            <div class="aspect-content">
-                <!--左邊-桌號+百分比-->
-                <div class="aspect-info">
-                    <!--百分比圖表-->
-                    <div id="demo-pie-2" class="pie-title-center chart-content" data-percent="66.67"> <span class="pie-value"></span> </div>
+        @{ int aa = 2; }
+        @foreach (var item in Model)
+        {
+            @functions{
+                public string Satisfaction(double smile)
+                {
+                    if (smile >= 0.75) { return "滿意"; }
+                    else if (smile <= 0.25) { return "不滿意"; }
+                    else { return "普通"; }
+                }
+            }
 
-                    <span class="aspect-name">桌號：4</span>
-                </div>
-                <!--右邊-人數-->
-                <div class="aspect-stat">
-                    <div class="all-opinions">
-                        <span class="all-opinions-count">3</span>
-                        <span>位</span>
+            //將微笑指數存入List
+            List<int> index = new List<int>();
+            for (int i = 0; i < item.idx.Length; i++)
+            {
+                if (item.idx[i] == 's') { index.Add(i); }
+            }
+            List<double> smileIdx = new List<double>();
+            for (int i = 0; i < index.Count; i++)
+            {
+                int length = 0;
+                if (i < index.Count - 1) { length = index[i + 1] - index[i] - 1; }
+                else { length = item.idx.Length - index[index.Count - 1] - 1; }
+                smileIdx.Add(Convert.ToDouble(item.idx.Substring(index[i] + 1, length)));
+            }
+            Dictionary<int, double> selfSatisfactionDict = new Dictionary<int, double>();
+            int satisfactory = 0, unsatisfactory = 0, medium = 0;
+            for (int i = 0; i < int.Parse(item.numPeople); i++)
+            {
+                selfSatisfactionDict.Add(i, smileIdx[i]);
+                switch (Satisfaction(selfSatisfactionDict[i]))
+                {
+                    case "滿意":
+                        satisfactory++;
+                        break;
+                    case "不滿意":
+                        unsatisfactory++;
+                        break;
+                    case "普通":
+                        medium++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            double average = Math.Round((satisfactory) / double.Parse(item.numPeople) * 100);
+            <!--tab迴圈-->
+            <div class="aspect-tab ">
+                <input id="item-@aa" type="checkbox" class="aspect-input" name="aspect">
+                <label for="item-@aa" class="aspect-label"></label>
+                <div class="aspect-content">
+                    <!--左邊-桌號+百分比-->
+                    <div class="aspect-info" id="aspect-info-@aa">
+                        <!--百分比圖表-->
+                        <div id="demo-pie-@aa" class="pie-title-center chart-content" data-percent="@average"> <span class="pie-value"></span> </div>
+                        <span class="aspect-name">桌號：@item.desk</span>
                     </div>
-                    <div>
-                        <span class="positive-count">2</span>
-                        <span class="neutral-count">1</span>
-                        <span class="negative-count">0</span>
-                    </div>
-                </div>
-            </div>
-            <!--start tabs展開後的內容-->
-            <div class="aspect-tab-content">
-                <div class="in-out-time col-md-12">
-                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:55</span></div>
-                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>13:12</span></div>
-                </div>
-                <!--start 偵測到的大圖-->
-                <div class="full-img-row">
-                    <div class="detect-full-img">
-                        <img src="~/detectImg/a1.jpg" />
-                    </div>
-                </div>
-                <!--//end 偵測到的大圖-->
-                <!--start 偵測到的小圖-->
-                <div class="sentiment-wrapper">
-                    <div>
-                        <div class="col-md-4">
-                            <div class="positive-count opinion-header">
-                                <span>滿意</span>
-                                <span>2</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                            </div>
+                    <!--右邊-人數-->
+                    <div class="aspect-stat">
+                        <div class="all-opinions">
+                            <span class="all-opinions-count" id="numPeople">@item.numPeople</span>
+                            <span>位</span>
                         </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="neutral-count opinion-header">
-                                <span>普通</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="negative-count opinion-header">
-                                <span>不滿意</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
-                            </div>
+                        <div>
+                            <span class="positive-count">@satisfactory</span>
+                            <span class="neutral-count">@medium</span>
+                            <span class="negative-count">@unsatisfactory</span>
                         </div>
                     </div>
                 </div>
-                <!--//end 偵測到的小圖-->
-            </div>
-            <!--//end tabs展開後的內容-->
-        </div>
-        <!--tab3-->
-        <div class="aspect-tab ">
-            <input id="item-3" type="checkbox" class="aspect-input" name="aspect">
-            <label for="item-3" class="aspect-label"></label>
-            <div class="aspect-content">
-                <!--左邊-桌號+百分比-->
-                <div class="aspect-info">
-                    <!--百分比圖表-->
-                    <div id="demo-pie-3" class="pie-title-center chart-content" data-percent="100"> <span class="pie-value"></span> </div>
+                <!--start tabs展開後的內容-->
+                <div class="aspect-tab-content">
+                    <div class="in-out-time col-md-12">
+                        <div class="col-md-6"><span>進場時間：&nbsp;</span><span id="arriveTime">@item.startTime.Insert(2, ":")</span></div>
+                        <div class="col-md-6"><span>離場時間：&nbsp;</span><span id="leaveTime">@item.endTime.Insert(2, ":")</span></div>
+                    </div>
+                    <!--start 偵測到的大圖-->
+                    <div class="full-img-row">
+                        <div class="detect-full-img">
+                            <img id="tabImg" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/00.jpg" />
+                        </div>
+                    </div>
+                    <!--//end 偵測到的大圖-->
+                    <!--start 偵測到的小圖-->
+                    <div class="sentiment-wrapper">
+                        <div>
+                            <div class="col-md-4">
+                                <div class="positive-count opinion-header">
+                                    <span>滿意</span>
+                                    <span class="positive-count">@satisfactory</span>
+                                </div>
+                                <div class="selfFace-@aa" id="satisfactoryIMG">
+                                    @{
+                                        for (int i = 0; i < int.Parse(item.numPeople); i++)
+                                        {
+                                            if (Satisfaction(selfSatisfactionDict[i]) == "滿意")
+                                            {
+                                                string img = i.ToString() + ".jpg";
+                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-4">
+                                <div class="neutral-count opinion-header">
+                                    <span>普通</span>
+                                    <span class="neutral-count">@medium</span>
+                                </div>
+                                <div class="selfFace-@aa" id="mediumIMG">
+                                    @{
+                                        for (int i = 0; i < int.Parse(item.numPeople); i++)
+                                        {
+                                            if (Satisfaction(selfSatisfactionDict[i]) == "普通")
+                                            {
+                                                string img = i.ToString() + ".jpg";
+                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                            }
+                                        }
+                                    }
 
-                    <span class="aspect-name">桌號：2</span>
-                </div>
-                <!--右邊-人數-->
-                <div class="aspect-stat">
-                    <div class="all-opinions">
-                        <span class="all-opinions-count">2</span>
-                        <span>位</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-4">
+                                <div class="negative-count opinion-header">
+                                    <span>不滿意</span>
+                                    <span class="negative-count">@unsatisfactory</span>
+                                </div>
+                                <div class="selfFace-@aa" id="unsatisfactoryIMG">
+                                    @{
+                                        for (int i = 0; i < int.Parse(item.numPeople); i++)
+                                        {
+                                            if (Satisfaction(selfSatisfactionDict[i]) == "不滿意")
+                                            {
+                                                string img = i.ToString() + ".jpg";
+                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <span class="positive-count">2</span>
-                        <span class="neutral-count">0</span>
-                        <span class="negative-count">0</span>
-                    </div>
+                    <!--//end 偵測到的小圖-->
                 </div>
+                <!--//end tabs展開後的內容-->
             </div>
-            <!--start tabs展開後的內容-->
-            <div class="aspect-tab-content">
-                <div class="in-out-time col-md-12">
-                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:47</span></div>
-                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>14:12</span></div>
-                </div>
-                <!--start 偵測到的大圖-->
-                <div class="full-img-row">
-                    <div class="detect-full-img">
-                        <img src="~/detectImg/a1.jpg" />
-                    </div>
-                </div>
-                <!--//end 偵測到的大圖-->
-                <!--start 偵測到的小圖-->
-                <div class="sentiment-wrapper">
-                    <div>
-                        <div class="col-md-4">
-                            <div class="positive-count opinion-header">
-                                <span>滿意</span>
-                                <span>2</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="neutral-count opinion-header">
-                                <span>普通</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="negative-count opinion-header">
-                                <span>不滿意</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--//end 偵測到的小圖-->
-            </div>
-            <!--//end tabs展開後的內容-->
-        </div>
-
-        <!--tab4-->
-        <div class="aspect-tab ">
-            <input id="item-4" type="checkbox" class="aspect-input" name="aspect">
-            <label for="item-4" class="aspect-label"></label>
-            <div class="aspect-content">
-                <!--左邊-桌號+百分比-->
-                <div class="aspect-info">
-                    <!--百分比圖表-->
-                    <div id="demo-pie-4" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
-
-                    <span class="aspect-name">桌號：6</span>
-                </div>
-                <!--右邊-人數-->
-                <div class="aspect-stat">
-                    <div class="all-opinions">
-                        <span class="all-opinions-count">4</span>
-                        <span>位</span>
-                    </div>
-                    <div>
-                        <span class="positive-count">2</span>
-                        <span class="neutral-count">2</span>
-                        <span class="negative-count">0</span>
-                    </div>
-                </div>
-            </div>
-            <!--start tabs展開後的內容-->
-            <div class="aspect-tab-content">
-                <div class="in-out-time col-md-12">
-                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:32</span></div>
-                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>14:02</span></div>
-                </div>
-                <!--start 偵測到的大圖-->
-                <div class="full-img-row">
-                    <div class="detect-full-img">
-                        <img src="~/detectImg/a1.jpg" />
-                    </div>
-                </div>
-                <!--//end 偵測到的大圖-->
-                <!--start 偵測到的小圖-->
-                <div class="sentiment-wrapper">
-                    <div>
-                        <div class="col-md-4">
-                            <div class="positive-count opinion-header">
-                                <span>滿意</span>
-                                <span>2</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="neutral-count opinion-header">
-                                <span>普通</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="negative-count opinion-header">
-                                <span>不滿意</span>
-                                <span>1</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--//end 偵測到的小圖-->
-            </div>
-            <!--//end tabs展開後的內容-->
-        </div>
-
+            aa = aa + 1;
+        }
         <!--tab5-->
-        <div class="aspect-tab ">
-            <input id="item-5" type="checkbox" class="aspect-input" name="aspect">
-            <label for="item-5" class="aspect-label"></label>
-            <div class="aspect-content">
-                <!--左邊-桌號+百分比-->
-                <div class="aspect-info">
-                    <!--百分比圖表-->
-                    <div id="demo-pie-5" class="pie-title-center chart-content" data-percent="100"> <span class="pie-value"></span> </div>
-
-                    <span class="aspect-name">桌號：10</span>
-                </div>
-                <!--右邊-人數-->
-                <div class="aspect-stat">
-                    <div class="all-opinions">
-                        <span class="all-opinions-count">3</span>
-                        <span>位</span>
-                    </div>
-                    <div>
-                        <span class="positive-count">3</span>
-                        <span class="neutral-count">0</span>
-                        <span class="negative-count">0</span>
-                    </div>
-                </div>
-            </div>
-            <!--start tabs展開後的內容-->
-            <div class="aspect-tab-content">
-                <div class="in-out-time col-md-12">
-                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span>11:15</span></div>
-                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span>13:11</span></div>
-                </div>
-                <!--start 偵測到的大圖-->
-                <div class="full-img-row">
-                    <div class="detect-full-img">
-                        <img src="~/detectImg/a1.jpg" />
-                    </div>
-                </div>
-                <!--//end 偵測到的大圖-->
-                <!--start 偵測到的小圖-->
-                <div class="sentiment-wrapper">
-                    <div>
-                        <div class="col-md-4">
-                            <div class="positive-count opinion-header">
-                                <span>滿意</span>
-                                <span>3</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="neutral-count opinion-header">
-                                <span>普通</span>
-                                <span>0</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="negative-count opinion-header">
-                                <span>不滿意</span>
-                                <span>0</span>
-                            </div>
-                            <div>
-                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--//end 偵測到的小圖-->
-            </div>
-            <!--//end tabs展開後的內容-->
-        </div>
     </div>
 </div>
-
 <!--start 圖表 Bar-->
 <div class="col-md-5">
     <div class="whiteCard-pannel">

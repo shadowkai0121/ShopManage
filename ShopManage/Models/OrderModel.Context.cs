@@ -31,5 +31,6 @@ namespace ShopManage.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductCost> ProductCosts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Satisfaction> Satisfactions { get; set; }
     }
 }
