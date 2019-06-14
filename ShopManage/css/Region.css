@@ -1,0 +1,57 @@
+﻿.whiteCard-pannel {
+    margin: 1rem 0;
+    padding-bottom: 1rem;
+}
+
+.legend-title {
+    font-size: 1.2em;
+    margin: 1rem;
+    float: left;
+}
+
+.legend-unit {
+    font-size: 0.9em;
+    margin-top:1.2rem;
+    float: left;
+}
+
+/*上排的 legend*/
+#legend #legendSvg {
+    /*width: 800px;*/
+}
+
+/*台灣地圖*/
+#region #mapSvg{
+    /*width:800px;
+    height:500px;*/
+}
+
+/*--地區銷售額佔比--*/
+.area-table{
+    font-size:1.2rem;
+    padding-bottom:1rem;
+}
+
+ .area-table thead tr th {
+    background-color: #1ABC9C;
+    color: white;
+}
+
+
+/*--- RWD width<1025 ----*/
+@media (max-width:1025px) {
+}
+/* width<768*/
+@media (max-width:769px) {
+    .whiteCard-pannel {
+        margin: 1rem 1rem;
+    }
+}
+/* width<375*/
+@media (max-width:376px) {
+    .whiteCard-pannel{
+        margin:1rem 1rem;
+    }
+    
+    
+}
