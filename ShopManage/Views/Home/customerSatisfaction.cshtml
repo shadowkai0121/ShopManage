@@ -64,16 +64,16 @@
     function onMessageArrived(message) {
         var str = message.payloadString;
         //收到新訊息後清空個人照片
-        $('.selfFace').children().remove();
+        $('.selfFace-1').children().remove();
         //拍照時間-20分鐘為抵達時間
         var arriveMin = parseInt(str.substr(8, 2)) * 60 + parseInt(str.substr(10, 2)) - 20;
         var hh = Math.floor(arriveMin / 60).toString();
         var mm = (arriveMin % 60).toString();
         var arriveTime = paddingLeft(hh) + ':' + paddingLeft(mm);
-        document.getElementById("arriveTime").innerText = arriveTime;
+        document.getElementById("arriveTime-1").innerText = arriveTime;
         //離場時間
         var leaveTime = str.substr(12, 2) + ':' + str.substr(14, 2);
-        document.getElementById("leaveTime").innerText = leaveTime;
+        document.getElementById("leaveTime-1").innerText = leaveTime;
         //人的編號對應的微笑指數存入物件，產生JSON
         var objPeople = "";
         var smilingIndex = [];
@@ -152,90 +152,31 @@
                 $(this.element).find('.pie-value').text(Math.round(average) + '%');
             }
         });
+        myChart.data = {
+            labels: ['滿意', '普通', '不滿意'],
+            datasets: [{
+                label: '',
+                data: [88 + satisfactory, 40 + medium, 11 + unsatisfactory],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        };
+        myChart.update();
     }
 </script>
 
 <div class="col-md-7">
     <div id="aspect-content">
-        <!--tab1 接收MQTT展示用-->
-        <div class="aspect-tab ">
-            <input id="item-1" type="checkbox" class="aspect-input" name="aspect">
-            <label for="item-1" class="aspect-label"></label>
-            <div class="aspect-content">
-                <!--左邊-桌號+百分比-->
-                <div class="aspect-info" id="aspect-info-1">
-                    <!--百分比圖表-->
-                    <div id="demo-pie-1" class="pie-title-center chart-content" data-percent="50"> <span class="pie-value"></span> </div>
-                    <span class="aspect-name">桌號：1</span>
-                </div>
-                <!--右邊-人數-->
-                <div class="aspect-stat">
-                    <div class="all-opinions">
-                        <span class="all-opinions-count" id="numPeople">4</span>
-                        <span>位</span>
-                    </div>
-                    <div>
-                        <span class="positive-count" id="positive-count-1">2</span>
-                        <span class="neutral-count" id="neutral-count-1">1</span>
-                        <span class="negative-count" id="negative-count-1">1</span>
-                    </div>
-                </div>
-            </div>
-            <!--start tabs展開後的內容-->
-            <div class="aspect-tab-content">
-                <div class="in-out-time col-md-12">
-                    <div class="col-md-6"><span>進場時間：&nbsp;</span><span id="arriveTime">12:47</span></div>
-                    <div class="col-md-6"><span>離場時間：&nbsp;</span><span id="leaveTime">15:34</span></div>
-                </div>
-                <!--start 偵測到的大圖-->
-                <div class="full-img-row">
-                    <div class="detect-full-img">
-                        <img id="tabImg" src="~/detectImg/a1.jpg" />
-                    </div>
-                </div>
-                <!--//end 偵測到的大圖-->
-                <!--start 偵測到的小圖-->
-                <div class="sentiment-wrapper">
-                    <div>
-                        <div class="col-md-4">
-                            <div class="positive-count opinion-header">
-                                <span>滿意</span>
-                                <span class="positive-count" id="positive-count-1">2</span>
-                            </div>
-                            <div class="selfFace" id="satisfactoryIMG">
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                                <img class="detect-part-img" src="~/detectImg/0.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="neutral-count opinion-header">
-                                <span>普通</span>
-                                <span class="neutral-count" id="neutral-count-1">1</span>
-                            </div>
-                            <div class="selfFace" id="mediumIMG">
-                                <img class="detect-part-img" src="~/detectImg/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-md-4">
-                            <div class="negative-count opinion-header">
-                                <span>不滿意</span>
-                                <span class="negative-count" id="negative-count-1">1</span>
-                            </div>
-                            <div class="selfFace" id="unsatisfactoryIMG">
-                                <img class="detect-part-img" src="~/detectImg/2.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--//end 偵測到的小圖-->
-            </div>
-            <!--//end tabs展開後的內容-->
-        </div>
-        @{ int no = 2; }
+        @{ int no = 1; }
         @foreach (var item in Model)
         {
             @functions{
@@ -282,7 +223,7 @@
                 }
             }
             double average = Math.Round((satisfactory) / double.Parse(item.numPeople) * 100);
-            <!--tab迴圈-->
+            <!--tab迴圈--><!--tab1為接收MQTT展示用-->
             <div class="aspect-tab ">
                 <input id="item-@no" type="checkbox" class="aspect-input" name="aspect">
                 <label for="item-@no" class="aspect-label"></label>
@@ -309,8 +250,8 @@
                 <!--start tabs展開後的內容-->
                 <div class="aspect-tab-content">
                     <div class="in-out-time col-md-12">
-                        <div class="col-md-6"><span>進場時間：&nbsp;</span><span id="arriveTime">@item.startTime.Insert(2, ":")</span></div>
-                        <div class="col-md-6"><span>離場時間：&nbsp;</span><span id="leaveTime">@item.endTime.Insert(2, ":")</span></div>
+                        <div class="col-md-6"><span>進場時間：&nbsp;</span><span id="arriveTime-@no">@item.startTime.Insert(2, ":")</span></div>
+                        <div class="col-md-6"><span>離場時間：&nbsp;</span><span id="leaveTime-@no">@item.endTime.Insert(2, ":")</span></div>
                     </div>
                     <!--start 偵測到的大圖-->
                     <div class="full-img-row">
@@ -408,7 +349,7 @@
                         labels: ['滿意', '普通', '不滿意'],
                         datasets: [{
                             label: '',
-                            data: [88, 40, 11],
+                            data: [88 , 40 , 11 ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -427,13 +368,10 @@
                         legend: {
                             display: false
                         },
-
-
                         scales: {
                             xAxes: [{
 
                             }],
-
 
                             yAxes: [{
                                 ticks: {

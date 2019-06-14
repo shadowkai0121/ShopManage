@@ -15,11 +15,14 @@ namespace ShopManage.Models
                         orderby o.desk, o.id descending
                         select o;
             var siList = query.ToList();
-            for (int i = 1; i < siList.Count; i++)
+            for (int i = 0; i < siList.Count; i++)
             {
-                if (siList[i].desk == siList[i - 1].desk)
+                if (i != 0)
                 {
-                    siList.RemoveAt(i);
+                    while (siList[i].desk == siList[i - 1].desk)
+                    {
+                        siList.RemoveAt(i);
+                    }
                 }
             }
             return siList;
