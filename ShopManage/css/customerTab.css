@@ -230,9 +230,11 @@
   border-color: #ff6e00; }
 
 .aspect-tab-content {
-  background-color: #f9f9f9;
-  font-size: 0;
-  text-align: justify; }
+    width: 100%;
+    background-color: #f9f9f9;
+    font-size: 0;
+    text-align: justify;
+}
 
 .sentiment-wrapper {
   padding: 24px 30px 30px; }
