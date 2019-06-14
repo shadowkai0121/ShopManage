@@ -73,7 +73,7 @@
         document.getElementById("arriveTime-1").innerText = arriveTime;
         //離場時間
         var leaveTime = str.substr(12, 2) + ':' + str.substr(14, 2);
-        document.getElementById("leaveTime-1").innerText = leaveTime;
+        document.getElementById("leaveTime-1").innerText = "用餐中";
         //人的編號對應的微笑指數存入物件，產生JSON
         var objPeople = "";
         var smilingIndex = [];
@@ -152,11 +152,12 @@
                 $(this.element).find('.pie-value').text(Math.round(average) + '%');
             }
         });
+        //更新月滿意度的bar
         myChart.data = {
             labels: ['滿意', '普通', '不滿意'],
             datasets: [{
                 label: '',
-                data: [88 + satisfactory, 40 + medium, 11 + unsatisfactory],
+                data: [432 + satisfactory, 141 + medium, 51 + unsatisfactory],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -349,7 +350,7 @@
                         labels: ['滿意', '普通', '不滿意'],
                         datasets: [{
                             label: '',
-                            data: [88 , 40 , 11 ],
+                            data: [432 , 141 , 51 ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
