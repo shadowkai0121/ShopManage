@@ -26,6 +26,11 @@ namespace ShopManage.Controllers
         // GET: Region
         public ActionResult Region()
         {
+
+            var query = from o in db.Orders
+                        select o;
+
+
             return View();
         }
 
@@ -33,19 +38,21 @@ namespace ShopManage.Controllers
         // GET: SingleProduct
         public ActionResult SingleProduct()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult SingleProduct(Order order)
-        {
-            var query = from o in db.Orders
-                        orderby o.TotalPrice
+            var query = from o in db.OrderDetails
+                        orderby o.Quantity descending
                         select o;
-
 
             return View(query.ToList());
         }
+
+        //[HttpPost]
+        //public ActionResult SingleProduct(Order order)
+        //{
+        //    //var query = from o in db.OrderDetails
+        //    //            select o;
+        //    //return Json(query, JsonRequestBehavior.AllowGet);
+        //    return View();
+        //}
 
 
 

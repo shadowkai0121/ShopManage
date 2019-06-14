@@ -1,4 +1,4 @@
-﻿@model List<ShopManage.Models.Order>
+﻿@model List<ShopManage.Models.OrderDetail>
 @{
     ViewBag.Title = "SingleProduct";
     ViewBag.ChineseTitleName = "單品分析";
@@ -8,8 +8,6 @@
     <div class="col-md-12">
         <div class="content-top-1">
             <div class="top-content1">
-                <div id="chartjs" class="col-md-3">
-                </div>
                 <div>
                     <canvas id="myChart" class="col-md-3" width="600" height="600"></canvas>
                 </div>
@@ -23,142 +21,101 @@
 
 <style>
     #myChart {
-        position: absolute;
         right: 30px;
         top: 13px;
         height: 550px !important;
-        width: 600px !important;
+        width: 650px !important;
     }
-    #chartjs{
-        /*position: fixed;*/
-    }
-
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
-<script>
-    var options = {
-        chart: {
-            width: 600,
-            height: 570,
-            type: 'bar',
-            stacked: true,
-            toolbar: {
-                show: false
-            },
-            zoom: {
-                enabled: true
-            }
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                legend: {
-                    position: 'bottom',
-                    offsetX: -10,
-                    offsetY: 0
-                }
-            }
-        }],
-        plotOptions: {
-            bar: {
-                horizontal: false,
-            },
-        },
-        "xaxis": {},
-        legend: {
-            "position": "bottom"
-        },
-        "fill": {
-            "opacity": 1
-        },
-        series: [{
-            name: '前菜',
-            data: [@Model[1].TotalPrice, 55, 41, 67]
-        }, {
-            name: '主菜',
-            data: [13, 23, 20, 8]
-        }, {
-            name: '湯品',
-            data: [11, 17, 15, 15,]
-        }, {
-            name: '飲料',
-            data: [21, 7, 25, 13,]
-        }, {
-            name: '甜點',
-            data: [21, 7, 25, 13,]
-        }
-        ],
-        xaxis: {
-            categories: ['Season one', 'Season two', 'Season third', 'Fourth season'],
-        },
-        legend: {
-            position: 'right',
-            offsetY: 40
-        },
-        fill: {
-            opacity: 1
-        },
-    }
 
-    var chart = new ApexCharts(
-        document.querySelector("#chartjs"),
-        options
-    );
+<script type="text/javascript">
+    //設定資料導入的地方
+    var quantity = [];
+    var productname = [];
+    var productid = []
 
-    chart.render();
-
-</script>
-
-
-<script>
-    Chart.defaults.global.defaultFontSize = 40;
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['top 1', 'top 2', 'top 3', 'top 4', 'top 5'],
-            datasets: [{
-                scaleStartValue: 10,
-                label: '當月銷售',
-                data: [6, 19, 3, 5, 2],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-
-                ],
-                borderWidth: 5,
-            }]
-        },
-        options:
+        @foreach (var item in Model)
         {
-            legend: {
-                display: false,
-            },
-            scales: {
-                xAxes: [{
-                    stacked: true,
-                }],
-                yAxes: [{
-                    stacked: true,
+            <text>
+        quantity.push(@item.Quantity);
+        productname.push("@item.ProductName");
+        productid.push("@item.ProductID")        
+            </text>
+        };
+    //console.log(productid)
 
-                }]
-            }
-        }
-    });
+    //圖表
+    var ctx = document.getElementById('myChart').getContext('2d');
+    Chart.defaults.global.defaultFontSize = 40;
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    //labels: [productname[0], productname[1], productname[3], productname[4], productname[5], productname[6]],
+                    labels:['前菜', '主菜', '湯品', '甜點', '飲料'],
+                    datasets: [{
+                        scaleStartValue: 10,
+                        label: '當月銷售',
+                        data: [quantity[0], quantity[28], quantity[74], quantity[99], quantity[68]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(54, 162, 235, 2)',
+                            
+                        ],
+                        borderWidth: 5,
+                    }]
+                },
+                options:
+                {
+                    tooltips: {
+                        callbacks: {
+                            
+                        },
+                        display: true,
+                        backgroundColor: 'rgba(41, 36, 33, 0.8)',
+                        caretSize: 20,
+                        xPadding: 10,
+                        yPadding:10,
+                    },
+
+                    //頂部的顏色與設置地方
+                    legend: {
+                        display: false,
+                        labels: {
+                            //fontColor: 'rgb(255, 99, 132)'
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            stacked: true,
+                        }],
+                        yAxes: [{
+                            stacked: true,
+
+                        }]
+                    }
+                }
+            });
+
+
+      
+
 </script>
 
