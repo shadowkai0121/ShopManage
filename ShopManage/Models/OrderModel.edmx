@@ -78,6 +78,18 @@
           <Property Name="ProductIntroduction" Type="nvarchar" MaxLength="500" />
           <Property Name="ProductDescription" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="Satisfaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desk" Type="int" />
+          <Property Name="date" Type="char" MaxLength="8" />
+          <Property Name="startTime" Type="char" MaxLength="4" />
+          <Property Name="endTime" Type="char" MaxLength="4" />
+          <Property Name="numPeople" Type="char" MaxLength="2" />
+          <Property Name="idx" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="SMIT09ModelStoreContainer">
           <EntitySet Name="DaySale" EntityType="Self.DaySale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
@@ -85,6 +97,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCost" EntityType="Self.ProductCost" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Satisfaction" EntityType="Self.Satisfaction" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -164,6 +177,18 @@
           <Property Name="ProductIntroduction" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProductDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Satisfaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desk" Type="Int32" />
+          <Property Name="date" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="startTime" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="endTime" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="numPeople" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="idx" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityContainer Name="SMIT09Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DaySales" EntityType="Self.DaySale" />
           <EntitySet Name="Members" EntityType="Self.Member" />
@@ -171,6 +196,7 @@
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="ProductCosts" EntityType="Self.ProductCost" />
           <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Satisfactions" EntityType="Self.Satisfaction" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -254,6 +280,19 @@
                 <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
                 <ScalarProperty Name="ProductIntroduction" ColumnName="ProductIntroduction" />
                 <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Satisfactions">
+            <EntityTypeMapping TypeName="SMIT09Model.Satisfaction">
+              <MappingFragment StoreEntitySet="Satisfaction">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="desk" ColumnName="desk" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="numPeople" ColumnName="numPeople" />
+                <ScalarProperty Name="idx" ColumnName="idx" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

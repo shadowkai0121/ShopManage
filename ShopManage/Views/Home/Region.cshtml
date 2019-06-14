@@ -3,16 +3,23 @@
     ViewBag.Title = "Region";
     ViewBag.ChineseTitleName = "區域熱度";
 }
-@model string
 
 <div class="content-top">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="content-top-1">
+            <div id="legend" class="top-content">
+                <div class="top-content" style="margin-left: 3%;font-size:10px;">區域銷售額：(萬)</div>
+            </div>
             <div id="region" class="top-content1">
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="ranking" class="content-top-1">
+            <span>Gild he like high wandered for womans wassailers none did een native love was longdeserted vaunted in he blazon glee</span>
+        </div>
     </div>
 </div>
 <div class="clearfix"></div>
@@ -26,52 +33,78 @@
         stroke-linejoin: round;
     }
 </style>
-
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
 <script>
     // 參數設定
     var param = {
         // svg 大小
-        width: 600,
-        height: 400,
+        width: 800,
+        height: 500,
         // 中心位置(經緯度)
-        center: [123, 23],
+        center: [121.5, 23.5],
         // 地圖縮放
-        scale: 5000,
+        scale: 7000,
         // 可自由增減數量
         // 資料級距
-        domain: [30000,60000],
+        domain: [20000,60000],
         // 級距顏色
         coloreRange: ["#FFCCCC", "#FF0000"],
         hover: "#FFDC35"
     }
     var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
-    // 繪製地圖
+
+    var color = d3.scaleLinear()
+        .domain(param.domain)
+        .range(param.coloreRange)
+
     $(function () {
+        // 圖例
+        d3.select('#legend').append('svg')
+            .attr('width', param.width)
+            .attr('height', 60)
+            .attr('id', 'legendSvg')
+
+        var svgLegend = d3.select('#legendSvg')
+
+        svgLegend.append('g')
+            .attr('class', 'legend')
+            .attr('transform', 'translate(20, 20)')
+
+        var legend = d3.legendColor()
+            .shapeWidth(60)
+            .orient('horizontal')
+            .scale(color)
+
+        svgLegend.select('.legend')
+            .call(legend)
+
+
+        // 地圖
         var svg = d3.select("#region").append("svg")
             // .attr("class", "svgback")
             .attr("width", param.width)
-            .attr("height", param.height);
+            .attr("height", param.height)
+            .attr('id', 'mapSvg')
 
-        // 投影設定
-        var projection = d3.geo.mercator()
+
+        // 地圖投影設定
+        var projection = d3.geoMercator()
             .center(param.center)
             .scale(param.scale);
-
-        var path = d3.geo.path()
+        var path = d3.geoPath()
             .projection(projection);
-
         // 讀取地圖資料
-        d3.json("../taiwan.json", function (error, topology) {
-            var g = svg.append("g");
-
+        d3.json("../taiwan.json").then(function (topology) {
+            console.log('after')
+            svg.append("g")
+                .attr('class', 'map')
             // objects 後面參數參考topojson內的object欄位
             var features = topojson.feature(topology, topology.objects.County_MOI_1060525).features
 
             // 縣市/行政區界線
-            d3.select("svg").append("path").datum(
+            d3.select("#mapSvg").append("path").datum(
                 topojson.mesh(topology,
                     topology.objects["County_MOI_1060525"],
                     function (a,
@@ -85,31 +118,18 @@
                 features[i].properties.money = data[features[i].properties.COUNTYNAME];
             }
 
-            // 顏色設定
-            var color = d3.scale.linear().domain(param.domain).range(param.coloreRange)
-            d3.select("g").selectAll("path")
+            d3.select(".map").selectAll("path")
                 .data(features)
                 .enter()
                 .append("path")
-                .attr("d", path)
-                .attr({
-                    d: path,
-                    name: function (d) {
-                        console.log(d.COUNTYNAME)
-                        return d.COUNTYNAME;
-                    },
-                    fill: function (d) {
-                        return color(d.properties.money)
-                    },
+                .attr('d', path)
+                .attr('name', function (d) { return d.properties.COUNTYNAME })
+                .attr('fill', function (d) { return color(d.properties.money) })
+                .on('mouseover', function () { d3.select(this).attr('fill', param.hover) })
+                .on('mouseout', function () {
+                    d3.select(this).attr('fill',
+                        function (d) { return color(d.properties.money) })
                 })
-                .on("mouseover", function (d) {
-                    d3.select(this).attr("fill", param.hover);
-
-                }).on("mouseleave", function (d) {
-                    d3.select(this).attr("fill", () => {
-                        return color(d.properties.money)
-                    });
-                });
-        });
+          });
     })
 </script>

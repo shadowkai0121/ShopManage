@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 using ShopManage.Models;
 namespace ShopManage.Controllers
 {
@@ -26,7 +27,6 @@ namespace ShopManage.Controllers
         public ActionResult Region()
         {
             TempData["RegionSales"] = dc.RegionSales();
-            TempData["Domain"] = dc.DrawDomain();
             return View();
         }
 
@@ -35,5 +35,15 @@ namespace ShopManage.Controllers
         {
             return View();
         }
+
+        //顧客滿意度
+        public ActionResult CustomerSatisfaction()
+        {
+            mCustomerSatisfaction cs = new mCustomerSatisfaction();
+            List<Satisfaction> siList = cs.GetSmileIndex();
+
+            return View(siList);
+        }
+        
     }
 }
