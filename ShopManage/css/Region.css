@@ -32,6 +32,12 @@
     padding-bottom:1rem;
 }
 
+ .area-table thead tr th {
+    background-color: #1ABC9C;
+    color: white;
+}
+
+
 /*--- RWD width<1025 ----*/
 @media (max-width:1025px) {
 }
