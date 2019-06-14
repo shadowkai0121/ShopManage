@@ -1,16 +1,16 @@
-﻿using ShopManage.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+using ShopManage.Models;
 namespace ShopManage.Controllers
 {
     public class HomeController : Controller
     {
-        SMIT09Entities db = new SMIT09Entities();
-
+        DataCleaning dc = new DataCleaning();
         // GET: Home
         public ActionResult Index()
         {
@@ -26,36 +26,24 @@ namespace ShopManage.Controllers
         // GET: Region
         public ActionResult Region()
         {
-
-            var query = from o in db.Orders
-                        select o;
-
-
+            TempData["RegionSales"] = dc.RegionSales();
             return View();
         }
-
 
         // GET: SingleProduct
         public ActionResult SingleProduct()
         {
-            var query = from o in db.OrderDetails
-                        orderby o.Quantity descending
-                        select o;
-
-            return View(query.ToList());
+            return View();
         }
 
-        //[HttpPost]
-        //public ActionResult SingleProduct(Order order)
-        //{
-        //    //var query = from o in db.OrderDetails
-        //    //            select o;
-        //    //return Json(query, JsonRequestBehavior.AllowGet);
-        //    return View();
-        //}
+        //顧客滿意度
+        public ActionResult CustomerSatisfaction()
+        {
+            mCustomerSatisfaction cs = new mCustomerSatisfaction();
+            List<Satisfaction> siList = cs.GetSmileIndex();
 
-
-
-
+            return View(siList);
+        }
+        
     }
 }

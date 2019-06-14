@@ -14,5 +14,7 @@ namespace ShopManage
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+       
     }
 }
