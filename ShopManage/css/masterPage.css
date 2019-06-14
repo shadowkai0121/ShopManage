@@ -80,6 +80,7 @@ i.nav_icon {
     /*=====左上角的 logo區======-*/
     .navbar-header h1 a.navbar-brand {
         padding-left: 1rem;
+        width:70%;
     }
 
     /*====== 左側-navbar =========*/
