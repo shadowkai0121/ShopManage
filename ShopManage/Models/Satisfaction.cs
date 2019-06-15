@@ -21,5 +21,8 @@ namespace ShopManage.Models
         public string endTime { get; set; }
         public string numPeople { get; set; }
         public string idx { get; set; }
+        public Nullable<int> numSatisfactory { get; set; }
+        public Nullable<int> numUnsatisfactory { get; set; }
+        public Nullable<int> numMedium { get; set; }
     }
 }
