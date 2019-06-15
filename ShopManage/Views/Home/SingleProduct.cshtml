@@ -88,29 +88,29 @@
 
 
     //設定資料導入的地方
-    var QuantityID1 = []; //ID==1 時 凱薩沙拉的數量
-    var QuantityID2 = [];//ID==2 時 黃金薯條的數量
-    var QuantityID3 = [];//ID==3 時 焗烤肉醬薯條的數量
-    var QuantityID4 = [];//ID==4 時 墨西哥香辣菲力牛肉披薩的數量
-    var QuantityID5 = [];//ID==5 時 炭烤沙朗心牛排與脆皮雞腿排的數量
-    var QuantityID6 = [];//ID==6 時 紹興酒奶油雞腿排的數量
-    var QuantityID7 = [];//ID==7 時 軟殼蟹蛤蜊花義大利麵佐香檸奶汁的數量
-    var QuantityID8 = [];//ID==8 時 紅醬蕃茄綜合海鮮麵的數量
-    var QuantityID9 = [];//ID==9 時 夏多內花蜜醋的數量
-    var QuantityID10 = [];//ID==10 時 蜜桃初戀泡泡的數量
-    var QuantityID11 = [];//ID==11 時 蜜釀鳳梨冰茶的數量
-    var QuantityID12 = [];//ID==12 時 季節水果茶的數量
-    var QuantityID13 = [];//ID==13 時 橙花君度檸檬塔的數量
-    var QuantityID14 = [];//ID==14 時 巧克力慕斯的數量
-    var QuantityID15 = [];//ID==15 時 玫瑰生乳酪蛋糕的數量
-    var QuantityID16 = [];//ID==16 時 冰淇淋QQ鬆餅的數量
-    var QuantityID17 = [];//ID==17 時 蛋糕三重奏的數量
-    var QuantityID18 = [];//ID==18 時 核桃燕麥鬆餅的數量
-    var QuantityID20 = [];//ID==20 時 特調玉米濃湯的數量
-    var QuantityID21 = [];//ID==21 時 意大利番茄湯的數量
-    var QuantityID22 = [];//ID==22 時 意大利婚禮湯的數量
-    var QuantityID23 = [];//ID==23 時 原味白豆湯的數量
-    var QuantityID24 = [];//ID==24 時 香料蔬菜湯的數量
+    var QuantityID1 = [];//ID==1 時 黃金薯條的數量
+    var QuantityID2 = [];//ID==2 時 焗烤肉醬薯條的數量
+    var QuantityID3 = [];//ID==3 時 墨西哥香辣菲力牛肉披薩的數量
+    var QuantityID4 = [];//ID==4 時 炭烤沙朗心牛排 的數量
+    var QuantityID5 = [];//ID==5 時 紹興酒奶油雞腿排 的數量
+    var QuantityID6 = [];//ID==6 時 軟殼蟹蛤蜊花義大利麵佐香檸奶汁 的數量
+    var QuantityID7 = [];//ID==7 時 紅醬蕃茄綜合海鮮麵 的數量
+    var QuantityID8 = [];//ID==8 時 夏多內花蜜醋 的數量
+    var QuantityID9 = [];//ID==9 時 蜜桃初戀泡泡 的數量
+    var QuantityID10 = [];//ID==10 時 蜜釀鳳梨冰茶 的數量
+    var QuantityID11 = [];//ID==11 時 季節水果茶 的數量
+    var QuantityID12 = [];//ID==12 時 橙花君度檸檬塔 的數量
+    var QuantityID13 = [];//ID==13 時 巧克力慕斯 的數量
+    var QuantityID14 = [];//ID==14 時 玫瑰生乳酪蛋糕 數量
+    var QuantityID15 = [];//ID==15 時 冰淇淋QQ鬆餅的數量
+    var QuantityID16 = [];//ID==16 時 蛋糕三重奏的數量
+    var QuantityID17 = [];//ID==17 時 核桃燕麥鬆餅的數量
+    var QuantityID18 = [];//ID==18 時 特調玉米濃湯的數量
+    var QuantityID19 = [];//ID==19 時 意大利番茄湯的數量
+    var QuantityID20 = [];//ID==20 時 意大利婚禮湯的數量
+    var QuantityID21 = [];//ID==21 時 原味白豆湯的數量
+    var QuantityID22 = [];//ID==22 時 香料蔬菜湯的數量
+
 
 
 
@@ -254,6 +254,14 @@
                 </text>
 
             }
+            else if (item.ProductID == 19)
+            {
+                <text>
+                    QuantityID19.push(@item.Quantity);
+
+                </text>
+
+            }
             else if (item.ProductID == 20)
             {
                 <text>
@@ -278,23 +286,7 @@
                 </text>
 
             }
-            else if (item.ProductID == 23)
-            {
-                <text>
-                    QuantityID23.push(@item.Quantity);
-
-                </text>
-
-            }
-            else if (item.ProductID == 24)
-            {
-                <text>
-                    QuantityID24.push(@item.Quantity);
-
-                </text>
-
-            }
-            
+           
 
           }
 
@@ -317,7 +309,7 @@
             ],
             datasets: [
                 {
-                    data: [QuantityID4.reduce(reducer), QuantityID5.reduce(reducer), QuantityID6.reduce(reducer), QuantityID7.reduce(reducer), QuantityID8.reduce(reducer)],
+                    data: [QuantityID3.reduce(reducer), QuantityID4.reduce(reducer), QuantityID5.reduce(reducer), QuantityID6.reduce(reducer), QuantityID7.reduce(reducer)],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
@@ -348,13 +340,13 @@
         type: 'doughnut',
         data: {
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                '黃金薯條',
+                '焗烤肉醬薯條',
+                
             ],
             datasets: [
                 {
-                    data: [QuantityID1.reduce(reducer), QuantityID2.reduce(reducer), QuantityID3.reduce(reducer)],
+                    data: [QuantityID1.reduce(reducer), QuantityID2.reduce(reducer)],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
@@ -386,13 +378,15 @@
         type: 'doughnut',
         data: {
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                '夏多內花蜜醋',
+                '蜜桃初戀泡泡',
+                '蜜釀鳳梨冰茶',
+                '季節水果茶',
+                
             ],
             datasets: [
                 {
-                    data: [QuantityID9.reduce(reducer), QuantityID10.reduce(reducer), QuantityID11.reduce(reducer), QuantityID12.reduce(reducer)],
+                    data: [QuantityID8.reduce(reducer), QuantityID9.reduce(reducer), QuantityID10.reduce(reducer), QuantityID11.reduce(reducer)],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
@@ -425,13 +419,17 @@
         type: 'doughnut',
         data: {
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                '橙花君度檸檬塔',
+                '巧克力慕斯',
+                '橙花君度檸檬塔',
+                '玫瑰生乳酪蛋糕',
+                '冰淇淋QQ鬆餅',
+                '蛋糕三重奏',
+                '核桃燕麥鬆餅'
             ],
             datasets: [
                 {
-                    data: [QuantityID13.reduce(reducer), QuantityID14.reduce(reducer), QuantityID15.reduce(reducer), QuantityID16.reduce(reducer), QuantityID17.reduce(reducer), QuantityID18.reduce(reducer)],
+                    data: [QuantityID12.reduce(reducer), QuantityID13.reduce(reducer), QuantityID14.reduce(reducer), QuantityID15.reduce(reducer), QuantityID16.reduce(reducer), QuantityID17.reduce(reducer)],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
@@ -465,13 +463,16 @@
         type: 'doughnut',
         data: {
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                '特調玉米濃湯',
+                '意大利番茄湯',
+                '意大利婚禮湯',
+                '原味白豆湯',
+                '香料蔬菜湯',
+                
             ],
             datasets: [
                 {
-                    data: [QuantityID20.reduce(reducer), QuantityID21.reduce(reducer), QuantityID22.reduce(reducer)], //, QuantityID23.reduce(reducer), QuantityID24.reduce(reducer)
+                    data: [QuantityID18.reduce(reducer), QuantityID19.reduce(reducer), QuantityID20.reduce(reducer), QuantityID21.reduce(reducer), QuantityID22.reduce(reducer)], 
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
