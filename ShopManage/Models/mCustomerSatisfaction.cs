@@ -9,6 +9,7 @@ namespace ShopManage.Models
     public class mCustomerSatisfaction
     {
         SMIT09Entities db = new SMIT09Entities();
+
         public List<Satisfaction> GetSmileIndex()
         {
             var query = from o in db.Satisfactions

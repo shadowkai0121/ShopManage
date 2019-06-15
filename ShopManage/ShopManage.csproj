@@ -587,6 +587,7 @@
     <Compile Include="Models\Satisfaction.cs">
       <DependentUpon>OrderModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SinleProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
