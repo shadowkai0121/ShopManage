@@ -18,16 +18,23 @@ namespace ShopManage.Models
         {
             Dictionary<string, int?> data = new Dictionary<string, int?>();
             var Q = db.Orders;
-            foreach (var item in Q)
+            try
             {
-                if (data.ContainsKey(item.ReceiverAddress))
+                foreach (var item in Q)
                 {
-                    data[item.ReceiverAddress] += item.TotalPrice;
+                    if (data.ContainsKey(item.ReceiverAddress))
+                    {
+                        data[item.ReceiverAddress] += item.TotalPrice;
+                    }
+                    else
+                    {
+                        data.Add(item.ReceiverAddress, item.TotalPrice);
+                    }
                 }
-                else
-                {
-                    data.Add(item.ReceiverAddress, item.TotalPrice);
-                }
+            }
+            catch 
+            {
+                return data;
             }
 
             return data;
