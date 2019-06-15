@@ -18,9 +18,7 @@
     <div class="col-md-8">
         <div class="content-top-1">
             <div class="top-content">
-                <h1>
-                    張兒代，間是我會為……主示要師面影生我他中最太，實見合希國：以此為開痛連世望代樂小步要位司人，全的未裡自不精細主因使總做里做下，裡可年以考早青；中能不人多的登受量作；像底安去少定推每，間友方二同兩，要間北片年旅幾單教過和必多另太，放有成嗎們、他強紅下：舉我進計多有業要工度才找長結在，好狀老般前，最要有然果日……化是為視治統工用孩子，子興筆。的童影病狀面走切：止本物下盡；愛留點動，快品被格上好導是養到大確腦老口麼兒。童臉線信為……爾名的率業定我，從在活它，團家就的是開然國學給。
-                </h1>
+                    <canvas id="myChart"></canvas>   
             </div>
         </div>
         <div class="clearfix"></div>
@@ -62,6 +60,7 @@
                 </div>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
 
     @*<canvas id="chartJs"></canvas>*@
@@ -286,7 +285,7 @@
                 </text>
 
             }
-           
+
 
           }
 
@@ -298,7 +297,7 @@
 
     var ctx = document.getElementById("chartJs1").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [
                 '墨西哥香辣菲力牛肉披撒',
@@ -328,6 +327,12 @@
                 }],
         },
         options: {
+            tooltips: {
+                display: true,
+                caretSize: 20,
+                bodyFontSize: 18
+
+            },
             legend: {
                 display: false,
             }
@@ -337,12 +342,12 @@
 
     var ctx = document.getElementById("chartJs2").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [
                 '黃金薯條',
                 '焗烤肉醬薯條',
-                
+
             ],
             datasets: [
                 {
@@ -352,19 +357,25 @@
                         "#008000",
                         "#228b22",
                         '#32cd32',
-                        
+
                     ],
                     hoverBackgroundColor: [
                         "#adff2f",
                         "#008000",
                         "#228b22",
                         "#32cd32",
-                       
+
                     ],
                     borderWidth: 2
                 }],
         },
         options: {
+            tooltips: {
+                display: true,
+                caretSize: 20,
+                bodyFontSize: 18
+
+            },
             legend: {
                 display: false,
             }
@@ -375,14 +386,14 @@
     //
     var ctx = document.getElementById("chartJs3").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [
                 '夏多內花蜜醋',
                 '蜜桃初戀泡泡',
                 '蜜釀鳳梨冰茶',
                 '季節水果茶',
-                
+
             ],
             datasets: [
                 {
@@ -392,19 +403,25 @@
                         "#00bfff",
                         "#0000ff",
                         '#00008b',
-                        
+
                     ],
                     hoverBackgroundColor: [
                         "#1e90ff",
                         "#00bfff",
                         "#0000ff",
                         '#00008b',
-                       
+
                     ],
                     borderWidth: 2
                 }],
         },
         options: {
+            tooltips: {
+                display: true,
+                caretSize: 20,
+                bodyFontSize: 18
+
+            },
             legend: {
                 display: false,
             }
@@ -415,7 +432,7 @@
     //
     var ctx = document.getElementById("chartJs4").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [
                 '橙花君度檸檬塔',
@@ -435,7 +452,7 @@
                         '#e68200',
                         '#ffff00',
                         '#cdb800'
-                        
+
                     ],
                     hoverBackgroundColor: [
                         "#ffcc00",
@@ -444,12 +461,18 @@
                         '#e68200',
                         '#ffff00',
                         '#cdb800'
-                        
+
                     ],
                     borderWidth: 2
                 }],
         },
         options: {
+            tooltips: {
+                display: true,
+                caretSize: 20,
+                bodyFontSize: 18
+
+            },
             legend: {
                 display: false,
             }
@@ -460,7 +483,7 @@
     //
     var ctx = document.getElementById("chartJs5").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [
                 '特調玉米濃湯',
@@ -468,11 +491,11 @@
                 '意大利婚禮湯',
                 '原味白豆湯',
                 '香料蔬菜湯',
-                
+
             ],
             datasets: [
                 {
-                    data: [QuantityID18.reduce(reducer), QuantityID19.reduce(reducer), QuantityID20.reduce(reducer), QuantityID21.reduce(reducer), QuantityID22.reduce(reducer)], 
+                    data: [QuantityID18.reduce(reducer), QuantityID19.reduce(reducer), QuantityID20.reduce(reducer), QuantityID21.reduce(reducer), QuantityID22.reduce(reducer)],
                     backgroundColor: [
                         "#800080",
                         "#cd00cd",
@@ -491,36 +514,47 @@
                 }],
         },
         options: {
+            tooltips: {
+                display: true,
+                caretSize: 20,
+                bodyFontSize: 18
+                
+            },
+
             legend: {
                 display: false,
+               
+                
+
             }
         }
     });
 
 
+    console.log(QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer))
 
-
-    @*
-    //圖表
     var ctx = document.getElementById('myChart').getContext('2d');
     Chart.defaults.global.defaultFontSize = 40;
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    //labels: [productname[0], productname[1], productname[3], productname[4], productname[5], productname[6]],
                     labels:['前菜', '主菜', '湯品', '甜點', '飲料'],
                     datasets: [{
                         scaleStartValue: 10,
                         label: '當月銷售',
-                        data: [quantity[0], quantity[28], quantity[74], quantity[99], quantity[68]],
+                        data: [
+                            QuantityID1.reduce(reducer) + QuantityID2.reduce(reducer),
+                            QuantityID3.reduce(reducer) + QuantityID4.reduce(reducer) + QuantityID5.reduce(reducer) + QuantityID6.reduce(reducer) + QuantityID7.reduce(reducer),
+                            QuantityID8.reduce(reducer) + QuantityID9.reduce(reducer) + QuantityID10.reduce(reducer) + QuantityID11.reduce(reducer),
+                            QuantityID12.reduce(reducer) + QuantityID13.reduce(reducer) + QuantityID14.reduce(reducer) + QuantityID15.reduce(reducer) + QuantityID16.reduce(reducer) + QuantityID17.reduce(reducer),
+                            QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer) + QuantityID20.reduce(reducer) + QuantityID21.reduce(reducer) + QuantityID22.reduce(reducer)
+                        ],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-
+                            'rgba(255, 99, 132, 0.3)',
+                            'rgba(54, 162, 235, 0.3)',
+                            'rgba(255, 206, 86, 0.3)',
+                            'rgba(75, 192, 192, 0.4)',
+                            'rgba(153, 102, 255, 0.4)',
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
@@ -528,26 +562,12 @@
                             'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
                             'rgba(153, 102, 255, 1)',
-                            'rgba(54, 162, 235, 2)',
-
                         ],
                         borderWidth: 5,
                     }]
                 },
                 options:
                 {
-                    tooltips: {
-                        callbacks: {
-
-                        },
-                        display: true,
-                        backgroundColor: 'rgba(41, 36, 33, 0.8)',
-                        caretSize: 20,
-                        xPadding: 10,
-                        yPadding:10,
-                    },
-
-                    //頂部的顏色與設置地方
                     legend: {
                         display: false,
                         labels: {
@@ -560,11 +580,10 @@
                         }],
                         yAxes: [{
                             stacked: true,
-
                         }]
                     }
                 }
-            });*@
+            });
 
 
 

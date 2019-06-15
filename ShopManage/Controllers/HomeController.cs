@@ -36,14 +36,11 @@ namespace ShopManage.Controllers
             SMIT09Entities db = new SMIT09Entities();
 
 
-            
-
             var query = from o in db.OrderDetails
                         orderby o.ProductID
                         select o;
 
            
-
             //return View();
             return View(query.ToList());
         }
