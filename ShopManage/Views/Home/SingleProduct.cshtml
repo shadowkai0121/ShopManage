@@ -9,7 +9,7 @@
     <div class="col-md-4">
         <div class="content-top-1">
             <div class="top-content">
-                <canvas id="chartJs"></canvas>
+                <canvas id="chartJs1"></canvas>
 
             </div>
         </div>
@@ -73,7 +73,7 @@
 <div class="clearfix"></div>
 
 <style>
-    #chartJs {
+    #chartJs1 {
         height: 200px !important;
         width: 400px !important;
     }
@@ -85,214 +85,6 @@
 
 
 <script type="text/javascript">
-
-    var ctx = document.getElementById("chartJs").getContext('2d');
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                '墨西哥香辣菲力牛肉披撒',
-                '炭烤沙朗心牛排與脆皮雞腿排',
-                '紹興酒奶油雞腿排',
-                '軟殼蟹蛤蜊花義大利麵佐香檸奶汁',
-                '紅醬蕃茄綜合海鮮麵'
-            ],
-            datasets: [
-                {
-                    data: [30, 50, 20, 30 ,10],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        '#e5a1a8',
-                        '#71d465'
-
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        '#e5a1a8',
-                        '#71d465'
-                    ],
-                    borderWidth: 2
-                }],
-
-
-        },
-
-        options: {
-            legend: {
-                display: false,
-            }
-
-        }
-
-
-    });
-
-
-    //
-    var ctx = document.getElementById("chartJs2").getContext('2d');
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            datasets: [
-                {
-                    data: [30, 50, 100],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ],
-                    borderWidth: 2
-                }],
-
-
-        },
-
-        options: {
-            legend: {
-                display: false,
-            }
-
-        }
-
-
-    });
-
-    //
-    var ctx = document.getElementById("chartJs3").getContext('2d');
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            datasets: [
-                {
-                    data: [30, 50, 100],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ],
-                    borderWidth: 2
-                }],
-
-
-        },
-
-        options: {
-            legend: {
-                display: false,
-            }
-
-        }
-
-
-    });
-
-    //
-    var ctx = document.getElementById("chartJs4").getContext('2d');
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            datasets: [
-                {
-                    data: [30, 50, 100],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ],
-                    borderWidth: 2
-                }],
-
-
-        },
-
-        options: {
-            legend: {
-                display: false,
-            }
-
-        }
-
-
-    });
-
-    //
-    var ctx = document.getElementById("chartJs5").getContext('2d');
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            datasets: [
-                {
-                    data: [30, 50, 100],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ],
-                    borderWidth: 2
-                }],
-
-
-        },
-
-        options: {
-            legend: {
-                display: false,
-            }
-
-        }
-
-
-    });
-
-   
 
 
     //設定資料導入的地方
@@ -319,12 +111,12 @@
     var QuantityID22 = [];//ID==22 時 意大利婚禮湯的數量
     var QuantityID23 = [];//ID==23 時 原味白豆湯的數量
     var QuantityID24 = [];//ID==24 時 香料蔬菜湯的數量
-  
-   
+
+
 
         @foreach (var item in Model)
         {
-            
+
             if (item.ProductID == 1)
             {
                 <text>
@@ -332,22 +124,277 @@
                 </text>
 
             }
+            else if (item.ProductID == 2)
+            {
+                <text>
+                    QuantityID2.push(@item.Quantity);
+                </text>
 
+            }
+            else if (item.ProductID == 3)
+            {
+                <text>
+                    QuantityID3.push(@item.Quantity);
+                </text>
+
+            }
+            else if (item.ProductID == 4)
+            {
+                <text>
+                    QuantityID4.push(@item.Quantity);
+                </text>
+
+            }
+            else if (item.ProductID == 5)
+            {
+                <text>
+                    QuantityID5.push(@item.Quantity);
+                </text>
+
+            }
+            else if (item.ProductID == 6)
+            {
+                <text>
+                    QuantityID6.push(@item.Quantity);
+                </text>
+
+            }
+            else if (item.ProductID == 7)
+            {
+                <text>
+                    QuantityID7.push(@item.Quantity);
+                </text>
+
+            }
+            else if (item.ProductID == 8)
+            {
+                <text>
+                    QuantityID8.push(@item.Quantity);
+   
+                </text>
+
+            }
 
 
          @*<text>
 
-          
+
         quantity.push(@item.Quantity);
-       
-        
+
+
          </text>*@
         };
 
+    var reducer = (accumulator, currentValue) => accumulator + currentValue;
+    
 
-    console.log(QuantityID1)
+    console.log(QuantityID1.reduce(reducer))
+
+    var ctx = document.getElementById("chartJs1").getContext('2d');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                '墨西哥香辣菲力牛肉披撒',
+                '炭烤沙朗心牛排與脆皮雞腿排',
+                '紹興酒奶油雞腿排',
+                '軟殼蟹蛤蜊花義大利麵佐香檸奶汁',
+                '紅醬蕃茄綜合海鮮麵'
+            ],
+            datasets: [
+                {
+                    data: [QuantityID1.reduce(reducer), QuantityID2.reduce(reducer), QuantityID3.reduce(reducer)],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    borderWidth: 2
+                }],
 
 
+        },
+
+        options: {
+            legend: {
+                display: false,
+            }
+
+        }
+
+
+    });
+
+
+    ////
+    //var ctx = document.getElementById("chartJs2").getContext('2d');
+    //var myDoughnutChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //        labels: [
+    //            'Red',
+    //            'Yellow',
+    //            'Blue'
+    //        ],
+    //        datasets: [
+    //            {
+    //                data: [30, 50, 100],
+    //                backgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+
+    //                ],
+    //                hoverBackgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+    //                ],
+    //                borderWidth: 2
+    //            }],
+
+
+    //    },
+
+    //    options: {
+    //        legend: {
+    //            display: false,
+    //        }
+
+    //    }
+
+
+    //});
+
+    ////
+    //var ctx = document.getElementById("chartJs3").getContext('2d');
+    //var myDoughnutChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //        labels: [
+    //            'Red',
+    //            'Yellow',
+    //            'Blue'
+    //        ],
+    //        datasets: [
+    //            {
+    //                data: [30, 50, 100],
+    //                backgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+
+    //                ],
+    //                hoverBackgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+    //                ],
+    //                borderWidth: 2
+    //            }],
+
+
+    //    },
+
+    //    options: {
+    //        legend: {
+    //            display: false,
+    //        }
+
+    //    }
+
+
+    //});
+
+    ////
+    //var ctx = document.getElementById("chartJs4").getContext('2d');
+    //var myDoughnutChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //        labels: [
+    //            'Red',
+    //            'Yellow',
+    //            'Blue'
+    //        ],
+    //        datasets: [
+    //            {
+    //                data: [30, 50, 100],
+    //                backgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+
+    //                ],
+    //                hoverBackgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+    //                ],
+    //                borderWidth: 2
+    //            }],
+
+
+    //    },
+
+    //    options: {
+    //        legend: {
+    //            display: false,
+    //        }
+
+    //    }
+
+
+    //});
+
+    ////
+    //var ctx = document.getElementById("chartJs5").getContext('2d');
+    //var myDoughnutChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //        labels: [
+    //            'Red',
+    //            'Yellow',
+    //            'Blue'
+    //        ],
+    //        datasets: [
+    //            {
+    //                data: [30, 50, 100],
+    //                backgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+
+    //                ],
+    //                hoverBackgroundColor: [
+    //                    "#FF6384",
+    //                    "#36A2EB",
+    //                    "#FFCE56"
+    //                ],
+    //                borderWidth: 2
+    //            }],
+
+
+    //    },
+
+    //    options: {
+    //        legend: {
+    //            display: false,
+    //        }
+
+    //    }
+
+
+    //});
 
 
 
