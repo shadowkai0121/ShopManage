@@ -170,25 +170,139 @@
             {
                 <text>
                     QuantityID8.push(@item.Quantity);
-   
+
                 </text>
 
             }
+            else if (item.ProductID == 9)
+            {
+                <text>
+                    QuantityID9.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 10)
+            {
+                <text>
+                    QuantityID10.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 11)
+            {
+                <text>
+                    QuantityID11.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 12)
+            {
+                <text>
+                    QuantityID12.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 13)
+            {
+                <text>
+                    QuantityID13.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 14)
+            {
+                <text>
+                    QuantityID14.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 15)
+            {
+                <text>
+                    QuantityID15.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 16)
+            {
+                <text>
+                    QuantityID16.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 17)
+            {
+                <text>
+                    QuantityID17.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 18)
+            {
+                <text>
+                    QuantityID18.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 20)
+            {
+                <text>
+                    QuantityID20.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 21)
+            {
+                <text>
+                    QuantityID21.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 22)
+            {
+                <text>
+                    QuantityID22.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 23)
+            {
+                <text>
+                    QuantityID23.push(@item.Quantity);
+
+                </text>
+
+            }
+            else if (item.ProductID == 24)
+            {
+                <text>
+                    QuantityID24.push(@item.Quantity);
+
+                </text>
+
+            }
+            
+
+          }
 
 
-         @*<text>
-
-
-        quantity.push(@item.Quantity);
-
-
-         </text>*@
-        };
 
     var reducer = (accumulator, currentValue) => accumulator + currentValue;
-    
-
     console.log(QuantityID1.reduce(reducer))
+
 
     var ctx = document.getElementById("chartJs1").getContext('2d');
     var myDoughnutChart = new Chart(ctx, {
@@ -203,7 +317,82 @@
             ],
             datasets: [
                 {
+                    data: [QuantityID4.reduce(reducer), QuantityID5.reduce(reducer), QuantityID6.reduce(reducer), QuantityID7.reduce(reducer), QuantityID8.reduce(reducer)],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    borderWidth: 2
+                }],
+        },
+        options: {
+            legend: {
+                display: false,
+            }
+        }
+    });
+
+
+    var ctx = document.getElementById("chartJs2").getContext('2d');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            datasets: [
+                {
                     data: [QuantityID1.reduce(reducer), QuantityID2.reduce(reducer), QuantityID3.reduce(reducer)],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    borderWidth: 2
+                }],
+        },
+        options: {
+            legend: {
+                display: false,
+            }
+        }
+    });
+
+
+    //
+    var ctx = document.getElementById("chartJs3").getContext('2d');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            datasets: [
+                {
+                    data: [QuantityID9.reduce(reducer), QuantityID10.reduce(reducer), QuantityID11.reduce(reducer), QuantityID12.reduce(reducer)],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
@@ -221,180 +410,92 @@
                     ],
                     borderWidth: 2
                 }],
-
-
         },
-
         options: {
             legend: {
                 display: false,
             }
-
         }
-
-
     });
 
 
-    ////
-    //var ctx = document.getElementById("chartJs2").getContext('2d');
-    //var myDoughnutChart = new Chart(ctx, {
-    //    type: 'doughnut',
-    //    data: {
-    //        labels: [
-    //            'Red',
-    //            'Yellow',
-    //            'Blue'
-    //        ],
-    //        datasets: [
-    //            {
-    //                data: [30, 50, 100],
-    //                backgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-
-    //                ],
-    //                hoverBackgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-    //                ],
-    //                borderWidth: 2
-    //            }],
-
-
-    //    },
-
-    //    options: {
-    //        legend: {
-    //            display: false,
-    //        }
-
-    //    }
-
-
-    //});
-
-    ////
-    //var ctx = document.getElementById("chartJs3").getContext('2d');
-    //var myDoughnutChart = new Chart(ctx, {
-    //    type: 'doughnut',
-    //    data: {
-    //        labels: [
-    //            'Red',
-    //            'Yellow',
-    //            'Blue'
-    //        ],
-    //        datasets: [
-    //            {
-    //                data: [30, 50, 100],
-    //                backgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-
-    //                ],
-    //                hoverBackgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-    //                ],
-    //                borderWidth: 2
-    //            }],
+    //
+    var ctx = document.getElementById("chartJs4").getContext('2d');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            datasets: [
+                {
+                    data: [QuantityID13.reduce(reducer), QuantityID14.reduce(reducer), QuantityID15.reduce(reducer), QuantityID16.reduce(reducer), QuantityID17.reduce(reducer), QuantityID18.reduce(reducer)],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465',
+                        '#c93db6'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465',
+                        '#c93db6'
+                    ],
+                    borderWidth: 2
+                }],
+        },
+        options: {
+            legend: {
+                display: false,
+            }
+        }
+    });
 
 
-    //    },
+    //
+    var ctx = document.getElementById("chartJs5").getContext('2d');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            datasets: [
+                {
+                    data: [QuantityID20.reduce(reducer), QuantityID21.reduce(reducer), QuantityID22.reduce(reducer), QuantityID23.reduce(reducer), QuantityID24.reduce(reducer)],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        '#e5a1a8',
+                        '#71d465'
+                    ],
+                    borderWidth: 2
+                }],
+        },
+        options: {
+            legend: {
+                display: false,
+            }
+        }
+    });
 
-    //    options: {
-    //        legend: {
-    //            display: false,
-    //        }
-
-    //    }
-
-
-    //});
-
-    ////
-    //var ctx = document.getElementById("chartJs4").getContext('2d');
-    //var myDoughnutChart = new Chart(ctx, {
-    //    type: 'doughnut',
-    //    data: {
-    //        labels: [
-    //            'Red',
-    //            'Yellow',
-    //            'Blue'
-    //        ],
-    //        datasets: [
-    //            {
-    //                data: [30, 50, 100],
-    //                backgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-
-    //                ],
-    //                hoverBackgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-    //                ],
-    //                borderWidth: 2
-    //            }],
-
-
-    //    },
-
-    //    options: {
-    //        legend: {
-    //            display: false,
-    //        }
-
-    //    }
-
-
-    //});
-
-    ////
-    //var ctx = document.getElementById("chartJs5").getContext('2d');
-    //var myDoughnutChart = new Chart(ctx, {
-    //    type: 'doughnut',
-    //    data: {
-    //        labels: [
-    //            'Red',
-    //            'Yellow',
-    //            'Blue'
-    //        ],
-    //        datasets: [
-    //            {
-    //                data: [30, 50, 100],
-    //                backgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-
-    //                ],
-    //                hoverBackgroundColor: [
-    //                    "#FF6384",
-    //                    "#36A2EB",
-    //                    "#FFCE56"
-    //                ],
-    //                borderWidth: 2
-    //            }],
-
-
-    //    },
-
-    //    options: {
-    //        legend: {
-    //            display: false,
-    //        }
-
-    //    }
-
-
-    //});
 
 
 
