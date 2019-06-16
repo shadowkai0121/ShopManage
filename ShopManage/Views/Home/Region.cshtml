@@ -3,22 +3,58 @@
     ViewBag.Title = "Region";
     ViewBag.ChineseTitleName = "區域熱度";
 }
+<link href="~/css/Region.css" rel="stylesheet" />
 
-<div class="content-top">
-    <div class="col-md-8">
-        <div class="content-top-1">
-            <div id="legend" class="top-content">
-                <div class="top-content" style="margin-left: 3%;font-size:10px;">區域銷售額：(萬)</div>
+<div>
+    <div class="col-md-7">
+        <div class="whiteCard-pannel">
+            <div id="legend">
+                <span class="legend-title">地區銷售額</span><span class="legend-unit">(單位：元)</span>
             </div>
-            <div id="region" class="top-content1">
+
+            <div>
+                <!--d3的台灣地圖-->
+                <div id="region"></div>
             </div>
+
             <div class="clearfix"></div>
         </div>
+
+
         <div class="clearfix"></div>
     </div>
-    <div class="col-md-4">
-        <div id="ranking" class="content-top-1">
-            <span>Gild he like high wandered for womans wassailers none did een native love was longdeserted vaunted in he blazon glee</span>
+    <div class="col-md-5">
+        <div id="ranking" class="whiteCard-pannel">
+            <div class="legend-title">地區銷售額佔比</div><span class="legend-unit">(單位：元)</span>
+            <table class="area-table table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>北部</th>
+                        <th>中部</th>
+                        <th>南部</th>
+                        <th>東部</th>
+                        <th>外島</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>40675</td>
+                        <td>41659</td>
+                        <td>3376</td>
+                        <td>725</td>
+                        <td>567</td>
+                    </tr>
+                    <tr>
+                        <td>36%</td>
+                        <td>37%</td>
+                        <td>20%</td>
+                        <td>14%</td>
+                        <td>13%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
         </div>
     </div>
 </div>
@@ -37,22 +73,44 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
 <script>
+
+
+
+
     // 參數設定
     var param = {
         // svg 大小
         width: 800,
         height: 500,
         // 中心位置(經緯度)
-        center: [121.5, 23.5],
+        center: [122, 23.5],
+
         // 地圖縮放
         scale: 7000,
+
         // 可自由增減數量
         // 資料級距
         domain: [20000,60000],
         // 級距顏色
         coloreRange: ["#FFCCCC", "#FF0000"],
-        hover: "#FFDC35"
+        hover: "#FFDC35",
+        // tooltips 與滑鼠的距離
+        tooltipsX: 20,
+        tooltipsY: -20
     }
+
+    //如果視窗<=768時---------------
+    if ($(window).width() < 769) {
+        param.center = [123.2, 23.6];
+        param.scale = 6000;
+    }
+
+    //如果視窗<=375時---------------
+    if ($(window).width() < 376) {
+        param.center = [125, 23];
+        param.scale = 4000;
+    }
+
     var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
 
     var color = d3.scaleLinear()
@@ -60,6 +118,17 @@
         .range(param.coloreRange)
 
     $(function () {
+        // tooltip
+        var tooltip = d3.select('body').append('div')
+            .attr('id', 'tooltip')
+            .style('position', 'absolute')
+            // z軸，數字越大顯示在越前面
+            .style('z-index', '100')
+            .style('visibility', 'hidden')
+            .style('background-color', '#00DDAA')
+            // tooltip 內顯示文字
+            .text('sample tooltip');
+
         // 圖例
         d3.select('#legend').append('svg')
             .attr('width', param.width)
@@ -83,7 +152,6 @@
 
         // 地圖
         var svg = d3.select("#region").append("svg")
-            // .attr("class", "svgback")
             .attr("width", param.width)
             .attr("height", param.height)
             .attr('id', 'mapSvg')
@@ -97,7 +165,6 @@
             .projection(projection);
         // 讀取地圖資料
         d3.json("../taiwan.json").then(function (topology) {
-            console.log('after')
             svg.append("g")
                 .attr('class', 'map')
             // objects 後面參數參考topojson內的object欄位
@@ -125,11 +192,19 @@
                 .attr('d', path)
                 .attr('name', function (d) { return d.properties.COUNTYNAME })
                 .attr('fill', function (d) { return color(d.properties.money) })
-                .on('mouseover', function () { d3.select(this).attr('fill', param.hover) })
+                .on('mouseover', function (d){
+                    d3.select(this).attr('fill', param.hover);
+                    tooltip.style('visibility', 'visible');
+                    tooltip.text(d.properties.COUNTYNAME + ", " + d.properties.money + "元");
+                })
+                .on('mousemove', function (d) {
+                    tooltip.style("top", (event.pageY + param.tooltipsY) + "px").style("left", (event.pageX + param.tooltipsX) + "px");
+                })
                 .on('mouseout', function () {
                     d3.select(this).attr('fill',
-                        function (d) { return color(d.properties.money) })
+                        function (d) { return color(d.properties.money) });
+                    tooltip.style('visibility', 'hidden');
                 })
-          });
+        });
     })
 </script>

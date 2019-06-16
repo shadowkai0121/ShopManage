@@ -230,6 +230,7 @@
   border-color: #ff6e00; }
 
 .aspect-tab-content {
+    width:100%;
   background-color: #f9f9f9;
   font-size: 0;
   text-align: justify; }

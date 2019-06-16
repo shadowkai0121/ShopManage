@@ -60,6 +60,18 @@
         else { return paddingLeft('0' + str); }
     }
 
+   @{
+       int? sumSatisfactory = 0, sumUnsatisfactory = 0, sumMedium = 0;
+       foreach (var item in Model)
+       {
+           sumSatisfactory = sumSatisfactory + item.numSatisfactory;
+           sumMedium = sumMedium + item.numMedium;
+           sumUnsatisfactory = sumUnsatisfactory + item.numUnsatisfactory;
+       }
+    }
+    var tmpSumSatisfactory =@sumSatisfactory;
+    var tmpSumMedium =@sumMedium;
+    var tmpSumUnsatisfactory =@sumUnsatisfactory;
     // called when a message arrives
     function onMessageArrived(message) {
         var str = message.payloadString;
@@ -73,7 +85,7 @@
         document.getElementById("arriveTime-1").innerText = arriveTime;
         //離場時間
         var leaveTime = str.substr(12, 2) + ':' + str.substr(14, 2);
-        document.getElementById("leaveTime-1").innerText = leaveTime;
+        document.getElementById("leaveTime-1").innerText = "用餐中";
         //人的編號對應的微笑指數存入物件，產生JSON
         var objPeople = "";
         var smilingIndex = [];
@@ -103,8 +115,8 @@
             "smileIdx": JSON.parse(objPeople)
         };
         //整桌的照片
-        var webDir = 'http://wonras.local:8000/shop/desk5/' + str.substr(0, 12);
-        document.getElementById('tabImg').src = webDir + '/00.jpg';
+        var webDir = 'http://wonras.local:8000/' + str.substr(0, 12);
+        document.getElementById('tabImg-1').src = webDir + '/00.jpg';
         //把每張照片放進HTML之前 先分類是滿意、普通還是不滿意
         var satisfactory = 0, unsatisfactory = 0, medium = 0;
         for (var i = 0; i < numPeople; i++) {
@@ -112,15 +124,15 @@
             var selfFaceDivId = "";
             switch (smileIndex(deskObj["smileIdx"][i])) {
                 case "滿意":
-                    selfFaceDivId = "satisfactoryIMG";
+                    selfFaceDivId = "satisfactoryIMG-1";
                     satisfactory++;
                     break;
                 case "不滿意":
-                    selfFaceDivId = "unsatisfactoryIMG";
+                    selfFaceDivId = "unsatisfactoryIMG-1";
                     unsatisfactory++;
                     break;
                 case "普通":
-                    selfFaceDivId = "mediumIMG";
+                    selfFaceDivId = "mediumIMG-1";
                     medium++;
                     break;
             }
@@ -152,11 +164,15 @@
                 $(this.element).find('.pie-value').text(Math.round(average) + '%');
             }
         });
+        tmpSumSatisfactory = tmpSumSatisfactory + satisfactory;
+        tmpSumMedium = tmpSumMedium + medium;
+        tmpSumUnsatisfactory=tmpSumUnsatisfactory + unsatisfactory;
+        //更新月滿意度的bar
         myChart.data = {
             labels: ['滿意', '普通', '不滿意'],
             datasets: [{
                 label: '',
-                data: [88 + satisfactory, 40 + medium, 11 + unsatisfactory],
+                data: [tmpSumSatisfactory, tmpSumMedium, tmpSumUnsatisfactory],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -176,9 +192,15 @@
 
 <div class="col-md-7">
     <div id="aspect-content">
-        @{ int no = 1; }
-        @foreach (var item in Model)
+        <!--tab迴圈--><!--tab1為接收MQTT展示用-->
+        @{ int no = 1;
+            List<ShopManage.Models.Satisfaction> newList = new List<ShopManage.Models.Satisfaction>(Model);
+            for (int i = 0; i < newList.Count; i++)
+            {if (i != 0){while (newList[i].desk == newList[i - 1].desk){newList.RemoveAt(i);}}}
+         }
+        @foreach (var item in newList)
         {
+            if (item.id == 27) { continue; }
             @functions{
                 public string Satisfaction(double smile)
                 {
@@ -187,13 +209,9 @@
                     else { return "普通"; }
                 }
             }
-
             //將微笑指數存入List
             List<int> index = new List<int>();
-            for (int i = 0; i < item.idx.Length; i++)
-            {
-                if (item.idx[i] == 's') { index.Add(i); }
-            }
+            for (int i = 0; i < item.idx.Length; i++){if (item.idx[i] == 's') { index.Add(i); }}
             List<double> smileIdx = new List<double>();
             for (int i = 0; i < index.Count; i++)
             {
@@ -203,27 +221,10 @@
                 smileIdx.Add(Convert.ToDouble(item.idx.Substring(index[i] + 1, length)));
             }
             Dictionary<int, double> selfSatisfactionDict = new Dictionary<int, double>();
-            int satisfactory = 0, unsatisfactory = 0, medium = 0;
-            for (int i = 0; i < int.Parse(item.numPeople); i++)
-            {
-                selfSatisfactionDict.Add(i, smileIdx[i]);
-                switch (Satisfaction(selfSatisfactionDict[i]))
-                {
-                    case "滿意":
-                        satisfactory++;
-                        break;
-                    case "不滿意":
-                        unsatisfactory++;
-                        break;
-                    case "普通":
-                        medium++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            double average = Math.Round((satisfactory) / double.Parse(item.numPeople) * 100);
-            <!--tab迴圈--><!--tab1為接收MQTT展示用-->
+            for (int i = 0; i < int.Parse(item.numPeople); i++){selfSatisfactionDict.Add(i, smileIdx[i]);}
+            //滿意人數佔整桌人數百分比
+            int numSatisfactory = item.numSatisfactory ?? 0;
+            double average = Math.Round(numSatisfactory / double.Parse(item.numPeople) * 100);
             <div class="aspect-tab ">
                 <input id="item-@no" type="checkbox" class="aspect-input" name="aspect">
                 <label for="item-@no" class="aspect-label"></label>
@@ -241,9 +242,9 @@
                             <span>位</span>
                         </div>
                         <div>
-                            <span class="positive-count">@satisfactory</span>
-                            <span class="neutral-count">@medium</span>
-                            <span class="negative-count">@unsatisfactory</span>
+                            <span class="positive-count" id="positive-count-@no">@item.numSatisfactory</span>
+                            <span class="neutral-count" id="neutral-count-@no">@item.numMedium</span>
+                            <span class="negative-count" id="negative-count-@no">@item.numUnsatisfactory</span>
                         </div>
                     </div>
                 </div>
@@ -256,7 +257,7 @@
                     <!--start 偵測到的大圖-->
                     <div class="full-img-row">
                         <div class="detect-full-img">
-                            <img id="tabImg" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/00.jpg" />
+                            <img id="tabImg-@no" src="http://wonras.local:8000/@item.date@item.startTime/00.jpg" />
                         </div>
                     </div>
                     <!--//end 偵測到的大圖-->
@@ -266,16 +267,16 @@
                             <div class="col-md-4">
                                 <div class="positive-count opinion-header">
                                     <span>滿意</span>
-                                    <span class="positive-count">@satisfactory</span>
+                                    <span class="positive-count" id="positive-count-@no">@item.numSatisfactory</span>
                                 </div>
-                                <div class="selfFace-@no" id="satisfactoryIMG">
+                                <div class="selfFace-@no" id="satisfactoryIMG-@no">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
                                             if (Satisfaction(selfSatisfactionDict[i]) == "滿意")
                                             {
                                                 string img = i.ToString() + ".jpg";
-                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                                <img class="detect-part-img" src="http://wonras.local:8000/@item.date@item.startTime/fIMG/@img" />
                                             }
                                         }
                                     }
@@ -286,16 +287,16 @@
                             <div class="col-md-4">
                                 <div class="neutral-count opinion-header">
                                     <span>普通</span>
-                                    <span class="neutral-count">@medium</span>
+                                    <span class="neutral-count" id="neutral-count-@no">@item.numMedium</span>
                                 </div>
-                                <div class="selfFace-@no" id="mediumIMG">
+                                <div class="selfFace-@no" id="mediumIMG-@no">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
                                             if (Satisfaction(selfSatisfactionDict[i]) == "普通")
                                             {
                                                 string img = i.ToString() + ".jpg";
-                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                                <img class="detect-part-img" src="http://wonras.local:8000/@item.date@item.startTime/fIMG/@img" />
                                             }
                                         }
                                     }
@@ -307,16 +308,16 @@
                             <div class="col-md-4">
                                 <div class="negative-count opinion-header">
                                     <span>不滿意</span>
-                                    <span class="negative-count">@unsatisfactory</span>
+                                    <span class="negative-count" id="negative-count-@no">@item.numUnsatisfactory</span>
                                 </div>
-                                <div class="selfFace-@no" id="unsatisfactoryIMG">
+                                <div class="selfFace-@no" id="unsatisfactoryIMG-@no">
                                     @{
                                         for (int i = 0; i < int.Parse(item.numPeople); i++)
                                         {
                                             if (Satisfaction(selfSatisfactionDict[i]) == "不滿意")
                                             {
                                                 string img = i.ToString() + ".jpg";
-                                                <img class="detect-part-img" src="http://wonras.local:8000/shop/desk5/@item.date@item.startTime/fIMG/@img" />
+                                                <img class="detect-part-img" src="http://wonras.local:8000/@item.date@item.startTime/fIMG/@img" />
                                             }
                                         }
                                     }
@@ -349,7 +350,7 @@
                         labels: ['滿意', '普通', '不滿意'],
                         datasets: [{
                             label: '',
-                            data: [88 , 40 , 11 ],
+                            data: [@sumSatisfactory , @sumMedium , @sumUnsatisfactory ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -370,9 +371,7 @@
                         },
                         scales: {
                             xAxes: [{
-
                             }],
-
                             yAxes: [{
                                 ticks: {
                                     beginAtZero: true
@@ -381,31 +380,24 @@
                         }
                     }
                 });
-
             </script>
         </div>
     </div>
-
 </div>
 <!--//end 圖表 Bar-->
 <!---->
 <div class="content-mid">
-
     <!--內容2-->
     <div class="clearfix"> </div>
 </div>
 <!----->
 <div class="content-bottom">
-
     <!--內容3-->
-
     <div class="clearfix"> </div>
 </div>
 
-<!--此頁面的js-->
 <!--pie-chart--->
 <script>
-
     $(document).ready(function () {
         $('#demo-pie-1').pieChart({
             barColor: '#7ED321',

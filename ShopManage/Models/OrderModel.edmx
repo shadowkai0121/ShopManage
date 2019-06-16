@@ -89,6 +89,9 @@
           <Property Name="endTime" Type="char" MaxLength="4" />
           <Property Name="numPeople" Type="char" MaxLength="2" />
           <Property Name="idx" Type="varchar" MaxLength="50" />
+          <Property Name="numSatisfactory" Type="int" />
+          <Property Name="numUnsatisfactory" Type="int" />
+          <Property Name="numMedium" Type="int" />
         </EntityType>
         <EntityContainer Name="SMIT09ModelStoreContainer">
           <EntitySet Name="DaySale" EntityType="Self.DaySale" Schema="dbo" store:Type="Tables" />
@@ -188,6 +191,9 @@
           <Property Name="endTime" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Name="numPeople" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="idx" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numSatisfactory" Type="Int32" />
+          <Property Name="numUnsatisfactory" Type="Int32" />
+          <Property Name="numMedium" Type="Int32" />
         </EntityType>
         <EntityContainer Name="SMIT09Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DaySales" EntityType="Self.DaySale" />
@@ -293,6 +299,9 @@
                 <ScalarProperty Name="endTime" ColumnName="endTime" />
                 <ScalarProperty Name="numPeople" ColumnName="numPeople" />
                 <ScalarProperty Name="idx" ColumnName="idx" />
+                <ScalarProperty Name="numSatisfactory" ColumnName="numSatisfactory" />
+                <ScalarProperty Name="numUnsatisfactory" ColumnName="numUnsatisfactory" />
+                <ScalarProperty Name="numMedium" ColumnName="numMedium" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
