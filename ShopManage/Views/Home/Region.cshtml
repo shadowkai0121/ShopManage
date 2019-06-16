@@ -115,7 +115,15 @@
         .range(param.coloreRange)
 
     $(function () {
-              
+        // tooltip
+        d3.select('body').append('div')
+            .attr('id', 'tooltip')
+            .style('position', 'absolute')
+            // z軸，數字越大顯示在越前面
+            .style('z-index', '100')
+            .style('visibility', 'hidden')
+            .style('background-color', '#00DDAA')
+            .text('sample tooltip');
 
         // 圖例
         d3.select('#legend').append('svg')
