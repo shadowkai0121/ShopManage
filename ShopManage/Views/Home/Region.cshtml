@@ -50,11 +50,11 @@
                         <td>20%</td>
                         <td>14%</td>
                         <td>13%</td>
-                    </tr>                    
+                    </tr>
                 </tbody>
             </table>
 
-           
+
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
 <script>
 
-    
+
 
 
     // 參數設定
@@ -84,16 +84,19 @@
         height: 500,
         // 中心位置(經緯度)
         center: [122, 23.5],
-        
+
         // 地圖縮放
         scale: 7000,
-        
+
         // 可自由增減數量
         // 資料級距
         domain: [20000,60000],
         // 級距顏色
         coloreRange: ["#FFCCCC", "#FF0000"],
-        hover: "#FFDC35"
+        hover: "#FFDC35",
+        // tooltips 與滑鼠的距離
+        tooltipsX: 20,
+        tooltipsY: -20
     }
 
     //如果視窗<768時---------------
@@ -105,7 +108,7 @@
     //如果視窗<376時---------------
     if ($(window).width() < 376) {
         param.center = [125, 23];
-        param.scale = 4000;         
+        param.scale = 4000;
     }
 
     var data = JSON.parse('@Html.Raw(TempData["RegionSales"])')
@@ -116,13 +119,14 @@
 
     $(function () {
         // tooltip
-        d3.select('body').append('div')
+        var tooltip = d3.select('body').append('div')
             .attr('id', 'tooltip')
             .style('position', 'absolute')
             // z軸，數字越大顯示在越前面
             .style('z-index', '100')
             .style('visibility', 'hidden')
             .style('background-color', '#00DDAA')
+            // tooltip 內顯示文字
             .text('sample tooltip');
 
         // 圖例
@@ -148,7 +152,6 @@
 
         // 地圖
         var svg = d3.select("#region").append("svg")
-            // .attr("class", "svgback")
             .attr("width", param.width)
             .attr("height", param.height)
             .attr('id', 'mapSvg')
@@ -162,7 +165,6 @@
             .projection(projection);
         // 讀取地圖資料
         d3.json("../taiwan.json").then(function (topology) {
-            console.log('after')
             svg.append("g")
                 .attr('class', 'map')
             // objects 後面參數參考topojson內的object欄位
@@ -190,11 +192,19 @@
                 .attr('d', path)
                 .attr('name', function (d) { return d.properties.COUNTYNAME })
                 .attr('fill', function (d) { return color(d.properties.money) })
-                .on('mouseover', function () { d3.select(this).attr('fill', param.hover) })
+                .on('mouseover', function (d){
+                    d3.select(this).attr('fill', param.hover);
+                    tooltip.style('visibility', 'visible');
+                    tooltip.text(d.properties.COUNTYNAME + ", " + d.properties.money + "元");
+                })
+                .on('mousemove', function (d) {
+                    tooltip.style("top", (event.pageY + param.tooltipsY) + "px").style("left", (event.pageX + param.tooltipsX) + "px");
+                })
                 .on('mouseout', function () {
                     d3.select(this).attr('fill',
-                        function (d) { return color(d.properties.money) })
+                        function (d) { return color(d.properties.money) });
+                    tooltip.style('visibility', 'hidden');
                 })
-          });
+        });
     })
 </script>
