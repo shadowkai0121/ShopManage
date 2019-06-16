@@ -7,74 +7,84 @@
 
 <div class="content-top">
     <div class="col-md-4">
-        <div class="content-top-1">
-            <div class="top-content">
+        <div class="content-top-1" style="height:465px">
+            <div class="">
                 <canvas id="chartJs1"></canvas>
-
             </div>
+            
         </div>
-
+        <div class="clearfix"></div>
     </div>
     <div class="col-md-8">
         <div class="content-top-1">
-            <div class="top-content">
-                    <canvas id="myChart"></canvas>   
-            </div>
+            @*<div class="content-graph">*@
+            <canvas id="myChart"></canvas>
+            @*</div>*@
         </div>
         <div class="clearfix"></div>
     </div>
-
-    <div class="col-md-3">
-        <div class="content-top-1">
-            <div class="top-content">
-                <div class="top-content">
+    <div>
+        <div class="col-md-3">
+            <div class="content-top-1">
+                <div class="content">
                     <canvas id="chartJs2"></canvas>
+
                 </div>
+
+                @*<div class="top-content">
+                        <div class="top-content">
+
+                        </div>
+                    </div>*@
             </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="content-top-1">
+                <canvas id="chartJs3"></canvas>
+                @*<div class="top-content">
+                        <div class="top-content">
+
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="content-top-1">
+                <canvas id="chartJs4"></canvas>
+                @*<div class="top-content">
+                        <div class="top-content">
+
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="content-top-1">
+                <canvas id="chartJs5"></canvas>
+                @*<div class="top-content">
+                        <div class="top-content">
+
+                        </div>
+                    </div>*@
+            </div>
+            <div class="clearfix"></div>
         </div>
 
+
+
     </div>
-    <div class="col-md-3">
-        <div class="content-top-1">
-            <div class="top-content">
-                <div class="top-content">
-                    <canvas id="chartJs3"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="content-top-1">
-            <div class="top-content">
-                <div class="top-content">
-                    <canvas id="chartJs4"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="content-top-1">
-            <div class="top-content">
-                <div class="top-content">
-                    <canvas id="chartJs5"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+
 
     @*<canvas id="chartJs"></canvas>*@
-
-
-
 
 </div>
 <div class="clearfix"></div>
 
 <style>
     #chartJs1 {
-        height: 200px !important;
-        width: 400px !important;
+        height: 100% !important;
+        width: 100% !important;
     }
 </style>
 
@@ -299,29 +309,15 @@
     var myDoughnutChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: [
-                '墨西哥香辣菲力牛肉披撒',
-                '炭烤沙朗心牛排與脆皮雞腿排',
-                '紹興酒奶油雞腿排',
-                '軟殼蟹蛤蜊花義大利麵佐香檸奶汁',
-                '紅醬蕃茄綜合海鮮麵'
+            labels: ['墨西哥香辣菲力牛肉披撒','炭烤沙朗心牛排與脆皮雞腿排','紹興酒奶油雞腿排','軟殼蟹蛤蜊花義大利麵佐香檸奶汁','紅醬蕃茄綜合海鮮麵'
             ],
             datasets: [
                 {
                     data: [QuantityID3.reduce(reducer), QuantityID4.reduce(reducer), QuantityID5.reduce(reducer), QuantityID6.reduce(reducer), QuantityID7.reduce(reducer)],
                     backgroundColor: [
-                        "#8b0000",
-                        "#bc3a3a",
-                        "#c71585",
-                        '#ff4500',
-                        '#db7093'
+                        "#8b0000","#bc3a3a","#c71585",'#ff4500','#db7093'
                     ],
-                    hoverBackgroundColor: [
-                        "#8b0000",
-                        "#cd5c5c",
-                        "#c71585",
-                        '#ff4500',
-                        '#db7093'
+                    hoverBackgroundColor: [ "#8b0000","#cd5c5c","#c71585",'#ff4500','#db7093'
                     ],
                     borderWidth: 2
                 }],
@@ -517,15 +513,10 @@
             tooltips: {
                 display: true,
                 caretSize: 20,
-                bodyFontSize: 18
-                
+                bodyFontSize: 18,
             },
-
             legend: {
                 display: false,
-               
-                
-
             }
         }
     });
@@ -534,7 +525,7 @@
     console.log(QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer))
 
     var ctx = document.getElementById('myChart').getContext('2d');
-    Chart.defaults.global.defaultFontSize = 40;
+    Chart.defaults.global.defaultFontSize = 18;
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -550,17 +541,17 @@
                             QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer) + QuantityID20.reduce(reducer) + QuantityID21.reduce(reducer) + QuantityID22.reduce(reducer)
                         ],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.3)',
-                            'rgba(54, 162, 235, 0.3)',
-                            'rgba(255, 206, 86, 0.3)',
                             'rgba(75, 192, 192, 0.4)',
+                            'rgba(255, 99, 132, 0.3)',
+                            'rgba(255, 206, 86, 0.3)',
+                            'rgba(54, 162, 235, 0.3)',
                             'rgba(153, 102, 255, 0.4)',
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 1)',
                             'rgba(153, 102, 255, 1)',
                         ],
                         borderWidth: 5,
