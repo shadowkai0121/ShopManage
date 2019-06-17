@@ -7,12 +7,23 @@
 
 <div class="content-top">
     <div class="col-md-4">
-        <div class="content-top-1" style="height:465px">
-            <div class="">
+        <div class="content-top-1">
+            <div class="top-content">
+                <label style="font-size:20px">主餐各餐品銷售數量:</label>
                 <canvas id="chartJs1"></canvas>
             </div>
-            
+            <div class="control-label">
+                <div class="clearfix"></div>
+                <div>
+                    <div class="blue"></div>
+                    <div class="purple"></div>
+                    <div class="wine"></div>
+
+                </div>
+            </div>
+
         </div>
+
         <div class="clearfix"></div>
     </div>
     <div class="col-md-8">
@@ -85,6 +96,37 @@
     #chartJs1 {
         height: 100% !important;
         width: 100% !important;
+    }
+    /*.foo {
+        float: left;
+        position:absolute;*/
+
+    /*float:inherit;*/
+    /*width: 20px;
+        height: 20px;
+        margin: 5%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }*/
+
+    .blue {
+        background: #13b4ff;
+        width: 20px;
+        height: 20px;
+        margin: 5%;
+        margin-top: 50px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .purple {
+        background: #ab3fdd;
+        width: 20px;
+        height: 20px;
+        margin: 5%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .wine {
+        background: #ae163e;
     }
 </style>
 
@@ -331,6 +373,9 @@
             },
             legend: {
                 display: false,
+            },
+            title: {
+
             }
         }
     });
