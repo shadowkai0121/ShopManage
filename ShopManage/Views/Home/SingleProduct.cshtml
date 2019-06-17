@@ -7,77 +7,53 @@
 
 <div class="content-top">
     <div class="col-md-4">
-        <div class="content-top-1">
+        <div class="content-top-1" style="height:360px">
+            <label style="font-size:20px">主餐各餐品銷售數量:</label>
             <div class="top-content">
-                <label style="font-size:20px">主餐各餐品銷售數量:</label>
                 <canvas id="chartJs1"></canvas>
-            </div>
-            <div class="control-label">
-                <div class="clearfix"></div>
-                <div>
-                    <div class="blue"></div>
-                    <div class="purple"></div>
-                    <div class="wine"></div>
-
-                </div>
             </div>
 
         </div>
-
         <div class="clearfix"></div>
     </div>
     <div class="col-md-8">
         <div class="content-top-1">
-            @*<div class="content-graph">*@
-            <canvas id="myChart"></canvas>
-            @*</div>*@
+            <canvas id="myChart"></canvas>        
         </div>
         <div class="clearfix"></div>
     </div>
+    <div class="clearfix"></div>
     <div>
         <div class="col-md-3">
             <div class="content-top-1">
                 <div class="content">
+                    <label style="font-size:20px">前菜各餐品銷售比:</label>
                     <canvas id="chartJs2"></canvas>
 
                 </div>
 
-                @*<div class="top-content">
-                        <div class="top-content">
-
-                        </div>
-                    </div>*@
             </div>
 
         </div>
         <div class="col-md-3">
             <div class="content-top-1">
+                <label style="font-size:20px">飲料各餐品銷售比:</label>
                 <canvas id="chartJs3"></canvas>
-                @*<div class="top-content">
-                        <div class="top-content">
 
-                        </div>
-                    </div>*@
             </div>
         </div>
         <div class="col-md-3">
             <div class="content-top-1">
+                <label style="font-size:20px">甜點各餐品銷售比:</label>
                 <canvas id="chartJs4"></canvas>
-                @*<div class="top-content">
-                        <div class="top-content">
 
-                        </div>
-                    </div>*@
             </div>
         </div>
         <div class="col-md-3">
             <div class="content-top-1">
+                <label style="font-size:20px">湯品各餐品銷售比:</label>
                 <canvas id="chartJs5"></canvas>
-                @*<div class="top-content">
-                        <div class="top-content">
 
-                        </div>
-                    </div>*@
             </div>
             <div class="clearfix"></div>
         </div>
@@ -86,9 +62,6 @@
 
     </div>
 
-
-    @*<canvas id="chartJs"></canvas>*@
-
 </div>
 <div class="clearfix"></div>
 
@@ -96,38 +69,14 @@
     #chartJs1 {
         height: 100% !important;
         width: 100% !important;
+        margin-top: 5%;
+        
     }
-    /*.foo {
-        float: left;
-        position:absolute;*/
-
-    /*float:inherit;*/
-    /*width: 20px;
-        height: 20px;
-        margin: 5%;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-    }*/
-
-    .blue {
-        background: #13b4ff;
-        width: 20px;
-        height: 20px;
-        margin: 5%;
-        margin-top: 50px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+    #myChart{
+        height: 300px !important;
     }
+    
 
-    .purple {
-        background: #ab3fdd;
-        width: 20px;
-        height: 20px;
-        margin: 5%;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    .wine {
-        background: #ae163e;
-    }
 </style>
 
 
@@ -567,7 +516,7 @@
     });
 
 
-    console.log(QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer))
+    //console.log(QuantityID18.reduce(reducer) + QuantityID19.reduce(reducer))
 
     var ctx = document.getElementById('myChart').getContext('2d');
     Chart.defaults.global.defaultFontSize = 18;
