@@ -225,8 +225,8 @@
         strokeTicks: true,
         highlights: [
             {
-                "from": 9000,
-                "to": 10000,
+                "from": 900,
+                "to": 1000,
                 "color": "rgba(200, 50, 50, .75)"
             }
         ],
@@ -243,6 +243,6 @@
     }).draw();
 
     setInterval(() => {
-        gauge.value = Math.random() * 2000 + 5000
+        gauge.value = Math.random() * 500 + 200
     }, 2000);
 </script>
