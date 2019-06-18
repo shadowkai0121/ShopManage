@@ -6,29 +6,54 @@
     color: #555;
 }
 
-.guage-pannel {
+/*==========訂購細節==================*/
+.orderDetail-pannel {
     background-color: white;
     margin: 1rem auto;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
-    padding-top:1.5rem;
-    padding-bottom:1rem;
+    padding:1.5rem 1rem;
     color: #555;
 }
 
-.guage-title{
+.orderDetail-title{
     float:left;
-    margin:0rem 1.5rem;
+    margin-bottom:0.5rem;
     font-size:1.2rem;
-    text-align:center;
 }
-/*============ 歷史紀錄 ==================*/
-.order-history {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: auto;
+    .orderDetail-title span{
+        padding-right:0.9rem;
+    }
+    /*============目前站上人次=================*/
+    .guage-pannel {
+        background-color: white;
+        margin: 1rem auto;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+        padding-top: 1.5rem;
+        padding-bottom: 1rem;
+        color: #555;
+    }
+
+.guage-title {
+    float: left;
+    margin: 0rem 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
 }
+
+    .guage-title span{
+        padding-right:0.7rem;
+    }
+    /*============ 歷史紀錄 ==================*/
+    .order-history {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        width: 100%;
+        margin: auto;
+    }
 
     .order-history table {
         line-height: 1.5rem;
@@ -36,10 +61,13 @@
         border-color: white;
     }
 
-    /*無框線*/
-    .order-history .table thead th, .table td, .table th {
-        border-style: none;
-    }
+        .order-history .table td{
+        font-size:1rem;
+        }
+/*無框線*/
+.order-history .table thead th, .table td, .table th {
+    border-style: none;
+}
         .order-history .table thead th{
             color:white;
             font-size:1.2rem;
