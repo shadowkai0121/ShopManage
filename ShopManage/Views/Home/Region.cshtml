@@ -38,11 +38,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>40675</td>
-                        <td>41659</td>
-                        <td>3376</td>
-                        <td>725</td>
-                        <td>567</td>
+                        <td>200675</td>
+                        <td>281659</td>
+                        <td>124893</td>
+                        <td>208691</td>
+                        <td>67895</td>
                     </tr>
                     <tr>
                         <td>36%</td>
@@ -69,9 +69,7 @@
         stroke-linejoin: round;
     }
 </style>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
+
 <script>
 
 
@@ -164,7 +162,8 @@
         var path = d3.geoPath()
             .projection(projection);
         // 讀取地圖資料
-        d3.json("../taiwan.json").then(function (topology) {
+        var url = "https://raw.githubusercontent.com/shadowkai0121/myNotes/master/JavaScript/D3/TaiwanMap/taiwan.json";
+        d3.json(url).then(function (topology) {
             svg.append("g")
                 .attr('class', 'map')
             // objects 後面參數參考topojson內的object欄位

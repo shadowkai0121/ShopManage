@@ -8,8 +8,9 @@
 <link href="~/css/index.css" rel="stylesheet" />
 
 <div>
-    <div class="col-md-4 ">
-        <!--日歷控制項-->
+
+    @*<div class="col-md-4 ">
+        <!--日歷控制項-->     
         <div class="calender-pannel">
             <div class="cal1 cal_2">
                 <div class="clndr">
@@ -155,7 +156,7 @@
                 </div>
             </div>
         </div>
-       
+      
         <!----Calender -------->
         <link rel="stylesheet" href="~/css/clndr.css" type="text/css" />
         <script src="~/js/underscore-min.js" type="text/javascript"></script>
@@ -163,35 +164,107 @@
         <script src="~/js/clndr.js" type="text/javascript"></script>
         <script src="~/js/site.js" type="text/javascript"></script>
         <!----End Calender -------->
-    </div>
-    <div class="col-md-3">
-        <div class="tab-pane active text-style top-content1" id="tab1">
-            <div class="inbox-right">
-                <div class="mailbox-content">
-                    <table class="table">
-                        <tbody>
-                            <tr class="table-row">
-                                <td class="table-text">
-                                    <h6>訂單名稱</h6>
-                                    <p>明細</p>
-                                </td>
-                                <td class="march">
-                                    06-08
-                                </td>
-                            </tr>
 
-                        </tbody>
-                    </table>
+    </div>*@
+    <div class="col-md-7">
+        <!--Tabs_訂單細節 內容-->
+        <div class="">
+            <div class="row orderDetail-pannel">
+                <div class="orderDetail-title">
+                    <p><span class="fa fa-list"></span>網購訂單</p>
                 </div>
-            </div>
+                    <div class="order-history">
+                        <table class=" col-md-12 table table-hover table-bordered pre-scrollable">
+                            <thead>
+                                <tr>
+                                    <th class="cn-col-3">訂購日期</th>
+                                    <th class="cn-col-3">訂單編號</th>
+                                    <!--<th>商品名稱</th>-->
+                                    <th class="cn-col-3">狀態</th>
+                                    <th class="cn-col-3">總金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color:#ffcccc">
+                                    <td>2019-06-18</td>
+                                    <td>201906180852M0112</td>
+                                    <!--<td>油醋燻鮭魚</td>-->
+                                    <td>未取貨</td>
+                                    <td class="td-dollar">$&nbsp;725</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-06-18</td>
+                                    <td>201906180779M3146</td>
+                                    <!--<td>油醋燻鮭魚</td>-->
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;680</td>
+                                </tr>
+                                <tr style="background-color:#ffcccc">
+                                    <td>2019-06-18</td>
+                                    <td>201906182012M0419</td>
+                                    <!--<td>油醋燻鮭魚</td>-->
+                                    <td>未取貨</td>
+                                    <td class="td-dollar">$&nbsp;500</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-05-04</td>
+                                    <td>201901041642M0012</td>
+                                    <!--<td>油醋燻鮭魚</td>-->
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;725</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-05-03</td>
+                                    <td>201905031642M1033</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;500</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-05-01</td>
+                                    <td>201905011642M0612</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;1250</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-04-20</td>
+                                    <td>201904201642M0314</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;1300</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-03-12</td>
+                                    <td>201903121642M3344</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;178</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-03-11</td>
+                                    <td>201903111642M5566</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;180</td>
+                                </tr>
+                                <tr>
+                                    <td>2019-03-08</td>
+                                    <td>201903081642M0128</td>
+                                    <td>已取貨</td>
+                                    <td class="td-dollar">$&nbsp;2500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+             </div>
+            
         </div>
+      
     </div>
     <!--時速表-->
     <div class="col-md-5">
-        <div class="content-top-1">
-            <div class="top-content1">
-                <canvas class="center-block" id="guage"></canvas>
+        <div class="guage-pannel">
+            <div class="guage-title">
+            <p><span class="fa fa-users"></span> 目前站上瀏覽人次</p>
             </div>
+                <canvas class="center-block" id="guage"></canvas>
+           
         </div>
     </div>
     <!--時速表-->
@@ -207,26 +280,26 @@
         height: 350,
         units: "People/Hr",
         minValue: 0,
-        maxValue: 10000,
+        maxValue: 1000,
         majorTicks: [
             "0",
-            "1000",
-            "2000",
-            "3000",
-            "4000",
-            "5000",
-            "6000",
-            "7000",
-            "8000",
-            "9000",
-            "10000"
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000"
         ],
         minorTicks: 5,
         strokeTicks: true,
         highlights: [
             {
-                "from": 9000,
-                "to": 10000,
+                "from": 900,
+                "to": 1000,
                 "color": "rgba(200, 50, 50, .75)"
             }
         ],
@@ -243,6 +316,6 @@
     }).draw();
 
     setInterval(() => {
-        gauge.value = Math.random() * 2000 + 5000
+        gauge.value = Math.random() * 500 + 200
     }, 2000);
 </script>
