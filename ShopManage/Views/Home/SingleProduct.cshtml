@@ -7,15 +7,33 @@
 
 <div class="content-top">
     <div class="col-md-4">
-        <div class="content-top-1" style="height:360px">
+        <div class="content-top-1">
             <label style="font-size:20px">主餐各餐品銷售數量:</label>
             <div class="top-content">
                 <canvas id="chartJs1"></canvas>
             </div>
-
+            <br />
+            <br />
+            <br />
         </div>
         <div class="clearfix"></div>
+        
     </div>
+    
+    @*<div class="col-md-3">
+    <div class="content-top-1">
+        <div class="content">
+            <label style="font-size:20px">前菜各餐品銷售比:</label>
+            <canvas id="chartJs2"></canvas>
+
+        </div>
+
+    </div>
+
+</div>*@
+
+
+
     <div class="col-md-8">
         <div class="content-top-1">
             <canvas id="myChart"></canvas>        
@@ -116,14 +134,18 @@
 
         @foreach (var item in Model)
         {
+            var i = 1;
 
             if (item.ProductID == 1)
             {
-                <text>
-                    QuantityID1.push(@item.Quantity);
+                <text>  //
+    QuantityID1.push(@item.Quantity);
+    //console.log(QuantityID1)
                 </text>
-
+                
             }
+
+           
             else if (item.ProductID == 2)
             {
                 <text>
@@ -288,7 +310,7 @@
             }
 
 
-          }
+        }
 
 
 

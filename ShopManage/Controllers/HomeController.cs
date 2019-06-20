@@ -33,16 +33,20 @@ namespace ShopManage.Controllers
         // GET: SingleProduct
         public ActionResult SingleProduct()
         {
-            SMIT09Entities db = new SMIT09Entities();
+            //SMIT09Entities db = new SMIT09Entities();
 
 
-            var query = from o in db.OrderDetails
-                        orderby o.ProductID
-                        select o;
+            //var query = from o in db.OrderDetails
+            //            orderby o.ProductID
+            //            select o;
 
+            SinleProduct ss = new SinleProduct();
            
-            //return View();
-            return View(query.ToList());
+
+            List<OrderDetail> countList = ss.GetCount();
+
+
+            return View(countList);
         }
 
         //顧客滿意度
