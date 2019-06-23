@@ -162,7 +162,7 @@
         var path = d3.geoPath()
             .projection(projection);
         // 讀取地圖資料
-        var url = "https://raw.githubusercontent.com/shadowkai0121/myNotes/master/JavaScript/D3/TaiwanMap/taiwan.json";
+        var url = "https://raw.githubusercontent.com/shadowkai0121/myNotes/master/JavaScript/JS_D3/TaiwanMap/taiwan.json";
         d3.json(url).then(function (topology) {
             svg.append("g")
                 .attr('class', 'map')
