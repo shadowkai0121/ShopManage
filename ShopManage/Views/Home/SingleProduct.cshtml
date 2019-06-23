@@ -138,9 +138,9 @@
 
             if (item.ProductID == 1)
             {
-                <text>  //
-    QuantityID1.push(@item.Quantity);
-    //console.log(QuantityID1)
+                <text>  
+                QuantityID1.push(@item.Quantity);
+                 console.log(QuantityID1)
                 </text>
                 
             }
@@ -309,9 +309,14 @@
 
             }
 
+            <text>
+    console.log(@item.UnitPrice);
+            </text>
 
+            i += 1;
         }
 
+   
 
 
     var reducer = (accumulator, currentValue) => accumulator + currentValue;

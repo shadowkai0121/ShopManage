@@ -33,13 +33,7 @@ namespace ShopManage.Controllers
         // GET: SingleProduct
         public ActionResult SingleProduct()
         {
-            //SMIT09Entities db = new SMIT09Entities();
-
-
-            //var query = from o in db.OrderDetails
-            //            orderby o.ProductID
-            //            select o;
-
+           
             SinleProduct ss = new SinleProduct();
            
 
